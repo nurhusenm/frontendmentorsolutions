@@ -1,0 +1,175 @@
+
+
+body{
+    background-color: hsl(216, 12%, 8%);
+   
+  
+}
+
+.card{
+    background-color: hsl(213, 19%, 18%);
+  width: 375px;
+  padding: 30px 20px;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+}
+.star-colored{
+    /* background-color: black; */
+    /* border-radius: 100%;
+    max-width: 20px; */
+    margin-bottom: 25px;
+
+    img{
+     padding: 20px;
+     background-color: hsla(217, 12%, 63%, 0.075);
+     border-radius: 100%;
+     width: 20px;
+
+    }
+}
+.title{
+    font-size: 2.3rem;
+    color:  hsl(0, 0%, 100%);
+    font-weight: 700;
+    margin: 5px;
+    margin-bottom: 20px;
+
+}
+p{
+    color: hsl(217, 12%, 63%);
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.8rem;
+    letter-spacing:0rem ;
+    text-align: start ;
+    /* width: 85%; */
+    margin: 0 10px;
+   
+}
+.rating-buttons{
+    margin: 30px 0;
+
+   
+
+    .rating-button{
+        background-color: hsla(217, 12%, 63%, 0.075);
+        border-style: none;
+        padding: 20px;
+        font-size: 20px;
+        border-radius: 100%;
+        color: hsl(217, 12%, 63%);
+        margin: 10px;
+        box-sizing: content-box;
+        font-weight: 700;
+        transition: background-color 0.3s, color 0.5s;
+        cursor: pointer;
+        
+
+        
+    }
+
+    .rating-button:hover{
+        background-color: hsl(25, 97%, 53%); /* Orange */
+    color: hsl(216, 12%, 8%); 
+    }
+    .rating-button:active{
+        background-color: hsl(0, 0%, 100%); /* Light Grey */
+        color: hsl(217, 12%, 63%); /* White */
+    }
+}
+.active{
+    background-color: white;
+    color: black;
+}
+.submitbtn{
+    width: calc(100% - 20px);
+    background-color: hsl(25, 97%, 53%);
+    color: black;
+    border: none;
+    border-radius: 35px;
+    padding: 18px;
+    font-size: 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    letter-spacing: 2px;
+
+}
+
+.submitbtn:hover{
+    background-color: white;
+}
+
+.thankyou-card{
+    text-align: center;
+
+    img{
+        margin-bottom: 20px;
+    }
+
+    .selected-rating{
+        color: hsl(25, 97%, 53%); /* Orange */
+        font-weight: 700;
+        padding: 0 5px;
+    }
+
+}
+
+.selected-rates{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: hsl(25, 97%, 53%);
+    font-size: 17px;
+    word-spacing: 5px; 
+    background-color: hsla(217, 12%, 63%, 0.075);
+    padding: 5px 20px;
+    border-radius: 25px;
+    margin: 0 40px;
+  
+  
+}
+
+.thank-you{
+    margin-top: 35px;
+    margin-bottom: 22px;
+    font-size: 2.1rem;
+    color:  hsl(0, 0%, 100%);
+    font-weight: 700;
+}
+
+.thank-text{
+    text-align: center;
+}
+
+.hidden{
+    display: none;
+}
+
+@media(max-width: 400px){
+    .card{
+        width: calc(100% - 30px);
+        padding: 20px 5px;
+    }
+    .title{
+        font-size: 1.8rem;
+    }
+    .rating-buttons{
+        margin: 15px 0;
+
+        .rating-button{
+            padding: 17px;
+            /* margin: 7px; */
+            font-size: 15px;
+        }
+    }
+   
+    .submitbtn{
+        width: calc(100% - 40px);
+
+    }
+}
