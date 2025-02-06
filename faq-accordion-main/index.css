@@ -1,0 +1,140 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+:root {
+    --White: hsl(0, 0%, 100%);
+    --Light-pink: hsl(275, 100%, 97%);
+    --Grayish-purple: hsl(292, 16%, 49%);
+    --Dark-purple: hsl(292, 42%, 14%);
+  }
+body{
+ 
+    font-family: 'Roboto', sans-serif;
+    background-image: url(./assets/images/background-pattern-desktop.svg);
+    background-repeat: no-repeat;
+    /* background-size: 100%; */
+    min-height: 10vh;
+    width: 100%;
+    display: grid;
+    place-content: center;
+    background-color: var(--light);
+    border-radius: 50px 50px 0 0;
+    background-color: var(--Light-pink);
+
+
+
+}
+
+.container{
+  max-width: 500px;
+  background-color: hsl(0, 0%, 100%);
+  margin-top: 170px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  padding: 2rem;
+
+
+}
+
+.header{
+    display: flex;
+    gap: 1rem;
+    gap: 1rem;
+    padding-bottom: 20px;
+
+    img{
+        width: 40px;
+        height: 40px;
+        
+    }
+
+    h2{
+        font-size: 40px;
+        font-weight: 800;
+    }
+}
+
+.question{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border-style: none;
+    background-color: hsl(0, 0%, 100%);
+font-size: 15px;
+margin-bottom: 30px;
+font-weight: 500;
+}
+.icons{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    cursor: pointer;
+    
+    img{
+        width: 25px;
+        height: 25px;
+    }
+}
+
+p{
+    font-size: 15px;
+    text-align: left;
+    margin: 20px 0;
+    color: var(--Grayish-purple);
+
+}
+
+.item-1{
+    width: 100%;
+    gap: 1rem;
+}
+
+.answer1{
+    display: none;
+}
+.answer1.active {
+    display: block; /* Show the answer when active */
+  }
+
+.icons img{
+    display: none;
+}
+
+.icons img.active{
+    display: block;
+}
+@media (max-width: 508px){
+    body{
+        background-image: url(./assets/images/background-pattern-mobile.svg);
+        background-size: 100%;
+    }
+    .container {
+        max-width: calc(100% - 30px); 
+        margin: 100px auto; 
+        padding: 2rem; 
+    }
+    .header{
+        h2{
+            font-size: 30px;
+        }
+    }
+    .question{
+        font-size: 12px;
+        text-align: left;
+       
+    }
+    p{
+        font-size: 12px;
+        text-align: left;
+    }
+    .icons{
+        img{
+            width: 20px;
+            height: 20px;
+        }
+    }
+}
