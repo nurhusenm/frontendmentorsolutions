@@ -1,0 +1,81 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --Blue: hsl(223, 87%, 63%);
+--Pale-Blue: hsl(223, 100%, 88%);
+ --Light-Red: hsl(354, 100%, 66%);
+--Gray: hsl(0, 0%, 59%);
+  --Very-Dark-Blue: hsl(209, 33%, 12%);
+}
+
+body{
+    font-family: 'Kumbh Sans', sans-serif;
+        padding: 0 23%; /* 50px padding on left and right */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh; /* Make sure body covers the full viewport height */
+        margin: 0; /* Remove default body margins */
+ 
+}
+
+
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: calc(100% -100px);
+    padding: 20px;
+}
+
+header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+
+header img{
+    width: 45px;
+    height: auto;
+   margin-bottom: 20px;
+}
+
+
+main .main-img{
+    width: 100%;
+    height: auto;
+}
+
+
+.head-info{
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+}
+
+
+header h2{
+    font-weight: 500;
+    color: var(--Gray);
+    font-size: 2rem;
+    
+    span{
+        color: black;
+        font-weight: 600;
+    }
+}
+header p{
+    font-size: 16px;
+    color: var(--Gray);
+    
+}
