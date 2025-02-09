@@ -4,6 +4,8 @@
 #####################################################
 *.sketch
 *.fig
+assets
+design
 
 # Avoid accidental XD upload if you convert the design file
 ###############################################
