@@ -1,0 +1,91 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --red: hsl(14, 86%, 42%);
+    --green: hsl(159, 69%, 38%);
+    --rose-50: hsl(20, 50%, 98%);
+    --rose-100: hsl(13, 31%, 94%);
+    --rose-300: hsl(14, 25%, 72%);
+    --rose-400: hsl(7, 20%, 60%);
+    --rose-500: hsl(12, 20%, 44%);
+    --rose-900: hsl(14, 65%, 9%);
+  
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+    margin: 80px 20px;
+    
+}
+
+header{
+    h1{
+        font-size: 34px;
+        font-weight: 600;
+        color: #333;
+        text-align: left;
+        margin-bottom: 20px;
+        font-size: 'Poppins', sans-serif;
+    }
+}
+
+
+main{
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-list{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+
+
+}
+.product-image-container{
+    position: relative;
+ position: relative;  /* This is important for absolute positioning of the button */
+ width: 100%;
+ display: flex;
+ justify-content: center;
+ margin-bottom: 40px;
+
+ .add-to-cart-btn{
+    position: absolute;
+    background-color: white;
+    border: none;
+    border-radius: 10%;
+    padding: 15px 30px;
+    color: black;
+    cursor: pointer;
+    gap: 10px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    bottom: -25px;
+    
+
+    &:hover{
+        background-color: var(--red);
+        color: white;
+    }
+  
+    
+
+    
+
+}
+}
+
+.product-list img{
+    width: 100%;
+    
+    object-fit: cover;
+    border-radius: 10px;
+    
+
+
+}
