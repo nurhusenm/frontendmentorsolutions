@@ -3,6 +3,7 @@ async function loadProducts() {
     const response = await fetch("./data.json");
     const products = await response.json();
 
+    // const incrementIcon = "../assets/images/icon-increment-quantity.svg";
     const productList = document.querySelector(".product-list");
     console.log(products);
     const cartIcon = "../assets/images/icon-add-to-cart.svg";
@@ -15,8 +16,15 @@ async function loadProducts() {
         product.name
       }" class="product-image"/>
             <button class="add-to-cart-btn">
-            <img src=${cartIcon} alt="icon" class="cart-icon">
-            Add to Cart</button>
+            <span class="plus-icon">+</span>
+          
+           
+           
+            <span class="btn-text">Add to Cart</span>
+            <span class="hover-text">1</span>
+           
+            <span class="minus-icon">-</span>
+            </button>
             </div>
 
 

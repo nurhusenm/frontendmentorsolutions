@@ -56,21 +56,45 @@ main{
 
  .add-to-cart-btn{
     position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: white;
     border: none;
-    border-radius: 10%;
-    padding: 15px 30px;
+    border-radius: 25px;
+    padding: 15px 35px;
     color: black;
     cursor: pointer;
-    gap: 10px;
-    border-radius: 25px;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
     bottom: -25px;
+    width: 200px;
+    
     
 
     &:hover{
         background-color: var(--red);
         color: white;
+    }
+    .minus-icon,
+    .plus-icon{
+        display: none;
+    
+        font-size: 17px;
+        font-weight: bold;
+    }
+   
+
+    .hover-text{
+        display: none;
+        font-size: 18px;
+        font-weight: bold;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .btn-text{
+        display: block;
+        margin: 0 auto;
     }
   
     
@@ -79,6 +103,26 @@ main{
 
 }
 }
+
+.add-to-cart-btn:hover .minus-icon,
+.add-to-cart-btn:hover .plus-icon {
+    display: block;
+}
+
+.add-to-cart-btn:hover .btn-text {
+    display: none;
+}
+
+.add-to-cart-btn:hover .hover-text {
+    display: block;
+}
+.btn-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
 
 .product-list img{
     width: 100%;
