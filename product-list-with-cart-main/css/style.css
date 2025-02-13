@@ -92,6 +92,11 @@ main{
  justify-content: center;
  margin-bottom: 50px;
 
+ &:hover{
+    border: 2px solid var(--red);
+    border-radius: 10px;
+ }
+
  .add-to-cart-btn{
     position: absolute;
     display: flex;
@@ -114,6 +119,10 @@ main{
         background-color: var(--red);
         color: white;
     padding: 15px 15px;
+
+    
+
+
 
     }
     .minus-icon,
@@ -206,8 +215,8 @@ main{
 aside{
     display: flex;
     flex-direction: column;
-    align-items: start;
-    justify-content: start;
+    /* align-items: start; */
+    /* justify-content: start; */
     gap: 8px;
     background-color: var(--rose-50);
     padding: 20px;
@@ -237,4 +246,129 @@ aside{
             background-color: var(--rose-50);
         }
     }
+
+    .empty-cart{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+
+        h2{
+            align-self: start;
+        }
+
+        .empty-cart-content{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 20px;
+
+
+        img{
+            width: 150px;
+            height: 150px;
+        }
+
+           
+
+
+            p{
+                font-size: 12px;
+                font-weight: 300;
+                color: var(--rose-500);
+             
+            }
+        }
+    }
 }
+
+
+.cart-items{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    gap: 20px;
+
+    .cart-item{
+        display: flex;
+        flex-direction: column;
+      width: 100%;
+        gap: 10px;
+
+        .item-name{
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--rose-900);
+        }
+
+        .cart-item-info{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+
+
+
+
+
+            .item-details{
+                display: flex;
+                flex-direction: row;
+               
+                gap: 10px;
+
+
+                .item-quantity{
+                    font-size: 16px;
+                    font-weight: 600;
+                    color: var(--red);
+                    padding-right: 10px;
+                }
+
+                .item-price, .item-total{
+                    font-size: 16px;
+                    font-weight: 600;
+                    color: var(--rose-300);
+                }
+                .
+                
+                
+                
+                
+            }
+
+            .delete-btn{
+               
+          
+                margin-top: -30px;
+               border-radius: 50%;
+               border: 1px solid var(--rose-400);
+               cursor: pointer;
+               padding: 2px;
+               transition: all 0.4s ease;
+
+               &:hover{
+              /* color: var(--rose-900); */
+              color: black;
+              border: 1px solid var(--rose-900);
+               }
+            }
+        }
+    }
+
+
+    .total-amount{
+        display: flex
+        ;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: space-between;
+        
+        
+    }
+}
+

@@ -35,14 +35,40 @@
       </main>
     </header>
     <aside>
-      <h2>your cart (<span class="cart-quantity">0</span>)</h2>
-      <div class="cart-item"></div>
-      <div class="total">
-        <p>total <span>$0.00</span></p>
+      <div class="empty-cart" style="display: none">
+        <h2>your cart (<span class="cart-quantity">0</span>)</h2>
+        <div class="empty-cart-content">
+          <img src="assets/images/illustration-empty-cart.svg" alt="" />
+          <p>your added items will appear here</p>
+        </div>
       </div>
-      <button class="confirm-btn">Confirm order</button>
-    </aside>
 
+      <div class="cart-items">
+        <h2>your cart (<span class="cart-quantity">2</span>)</h2>
+        <div class="cart-item">
+          <p class="item-name">Waffle with Berries</p>
+          <div class="cart-item-info">
+            <div class="item-details">
+              <!-- <p class="item-name">Waffle</p> -->
+              <p class="item-quantity">x<span>1</span></p>
+              <p class="item-price">
+                <span style="font-size: 12px">@</span> $6.50
+              </p>
+              <p class="item-total">$6.50</p>
+            </div>
+            <button class="delete-btn">
+              <img src="assets/images/icon-remove-item.svg" alt="" />
+            </button>
+          </div>
+        </div>
+
+        <div class="total-amount">
+          <p>Order total</p>
+          <p>$13.00</p>
+        </div>
+        <button class="confirm-btn">Confirm order</button>
+      </div>
+    </aside>
     <!-- Waffle with Berries Waffle 6.50 Add to Cart Vanilla Bean Crème Brûlée Crème
     Brûlée 7.00 Add to Cart Macaron Mix of Five Macaron 8.00 Add to Cart Classic
     Tiramisu Tiramisu 5.50 Add to Cart Pistachio Baklava Baklava 4.00 Add to
