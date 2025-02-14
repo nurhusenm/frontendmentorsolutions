@@ -33,7 +33,7 @@ aside {
     height: fit-content;
     position: sticky;
     top: 20px;
-    padding: 20px;
+    /* padding: 20px; */
     margin: 0;
 }
 
@@ -192,13 +192,13 @@ main{
     gap: 8px;
 
     .product-category{
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 600;
         color: var(--rose-500);
     }
 
     .product-name{
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 600;
         color: var(--rose-900);
     }
@@ -221,7 +221,7 @@ aside{
     background-color: var(--rose-50);
     padding: 20px;
     margin-top: 20px;
-    width: 280px;
+    /* width: 280px; */
 
     h2{
         color: var(--red);
@@ -234,16 +234,16 @@ aside{
         color: white;
         font-size: 16px;
         font-weight: 400;
-        padding: 10px 20px;
+        padding: 15px 20px;
         border: none;
         border-radius: 25px;
         cursor: pointer;
         transition: all 0.4s ease;
         width: 100%;
-        margin-top: 20px;
+        /* margin-top: 20px; */
 
         &:hover{
-            background-color: var(--rose-50);
+            background-color: var(--rose-900);
         }
     }
 
@@ -334,7 +334,7 @@ aside{
                     font-weight: 600;
                     color: var(--rose-300);
                 }
-                .
+                
                 
                 
                 
@@ -359,16 +359,55 @@ aside{
             }
         }
     }
-
+    
 
     .total-amount{
-        display: flex
-        ;
-                    flex-direction: row;
-                    align-items: center;
-                    justify-content: space-between;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 40px;
+
+        .total-amount-text{
+            font-size: 12px;
+            font-weight: 200;
+            color: var(--rose-500);
+        }
+
+        .total-amount-price{
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--rose-900);
+        }
         
         
     }
+
+
+    .carbon-neutral-delivery{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        width: 100%;
+        /* margin-top: 20px; */
+        background-color: var(--rose-100);
+        padding: 15px;
+        border-radius: 10px;
+
+        img{
+            width: 20px;
+            height: 20px;
+        }
+
+        p{
+            font-size: 12px;
+            font-weight: 200;
+            color: var(--rose-500);
+        }
+    }
+   
 }
 
