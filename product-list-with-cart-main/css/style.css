@@ -157,6 +157,9 @@ main{
 .add-to-cart-btn:hover .minus-icon,
 .add-to-cart-btn:hover .plus-icon {
     display: block;
+    &:active{
+        transform: translateY(5px);
+    }
 }
 
 .add-to-cart-btn:hover .btn-text {
@@ -292,16 +295,20 @@ aside{
     align-items: start;
     justify-content: start;
     gap: 20px;
+   
 
     .cart-item{
         display: flex;
         flex-direction: column;
       width: 100%;
         gap: 10px;
+        margin: 40px 0;
+
+
 
         .item-name{
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
             color: var(--rose-900);
         }
 
@@ -368,6 +375,7 @@ aside{
         justify-content: space-between;
         width: 100%;
         margin-top: 40px;
+        margin-bottom: 25px;
 
         .total-amount-text{
             font-size: 12px;
@@ -392,7 +400,7 @@ aside{
         justify-content: center;
         gap: 5px;
         width: 100%;
-        /* margin-top: 20px; */
+        margin-bottom: 10px;
         background-color: var(--rose-100);
         padding: 15px;
         border-radius: 10px;

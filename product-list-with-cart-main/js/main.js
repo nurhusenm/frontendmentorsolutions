@@ -1,3 +1,10 @@
+const emptyCart = document.querySelector(".empty-cart");
+const cartItems = document.querySelector(".cart-items");
+const cartQuantity = document.querySelector(".cart-quantity");
+const plusIcon = document.querySelector(".plus-icon");
+const minusIcon = document.querySelector(".minus-icon");
+// const hoverText = document.querySelector(".hover-text");
+
 async function loadProducts() {
   try {
     const response = await fetch("./data.json");
@@ -50,3 +57,41 @@ async function loadProducts() {
 }
 
 document.addEventListener("DOMContentLoaded", loadProducts);
+document.addEventListener("DOMContentLoaded", () => {
+  let totalQuantity = 0;
+  // let productQuantity = 0;
+  cartQuantity.textContent = totalQuantity;
+  console.log(totalQuantity);
+
+  document.addEventListener("click", (e) => {
+    if (e.target.classList.contains("plus-icon")) {
+      e.preventDefault();
+
+      totalQuantity++;
+      cartQuantity.textContent = totalQuantity;
+
+      if (totalQuantity > 0) {
+        emptyCart.style.display = "none";
+        cartItems.style.display = "block";
+      }
+    }
+
+    if (e.target.classList.contains("minus-icon")) {
+      e.preventDefault();
+      // console.log("minus clicked");
+      totalQuantity--;
+
+      cartQuantity.textContent = totalQuantity;
+      // console.log(totalQuantity);
+      if (totalQuantity < 0) {
+        totalQuantity = 0;
+        cartQuantity.textContent = totalQuantity;
+      }
+
+      if (totalQuantity === 0) {
+        emptyCart.style.display = "block";
+        cartItems.style.display = "none";
+      }
+    }
+  });
+});
