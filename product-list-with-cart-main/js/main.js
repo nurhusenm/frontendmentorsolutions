@@ -59,17 +59,29 @@ async function loadProducts() {
 document.addEventListener("DOMContentLoaded", loadProducts);
 document.addEventListener("DOMContentLoaded", () => {
   let totalQuantity = 0;
-  // let productQuantity = 0;
-  cartQuantity.textContent = totalQuantity;
-  console.log(totalQuantity);
+  const productQuantities = {}; // Store quantities for each product
 
   document.addEventListener("click", (e) => {
-    if (e.target.classList.contains("plus-icon")) {
-      e.preventDefault();
+    const productCard = e.target.closest(".product-card");
+    if (!productCard) return; // Exit if click wasn't on a product card
 
+    const productName = productCard.querySelector(".product-name").textContent;
+    const hoverText = productCard.querySelector(".hover-text");
+
+    // Initialize product quantity if it doesn't exist
+    if (!productQuantities[productName]) {
+      productQuantities[productName] = 0;
+    }
+
+    if (e.target.classList.contains("plus-icon")) {
+      productQuantities[productName]++;
       totalQuantity++;
+
+      // Update displays
+      hoverText.textContent = productQuantities[productName];
       cartQuantity.textContent = totalQuantity;
 
+      // Show cart items if there are products
       if (totalQuantity > 0) {
         emptyCart.style.display = "none";
         cartItems.style.display = "block";
@@ -77,20 +89,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (e.target.classList.contains("minus-icon")) {
-      e.preventDefault();
-      // console.log("minus clicked");
-      totalQuantity--;
+      if (productQuantities[productName] > 0) {
+        productQuantities[productName]--;
+        totalQuantity--;
 
-      cartQuantity.textContent = totalQuantity;
-      // console.log(totalQuantity);
-      if (totalQuantity < 0) {
-        totalQuantity = 0;
+        // Update displays
+        hoverText.textContent = productQuantities[productName];
         cartQuantity.textContent = totalQuantity;
-      }
 
-      if (totalQuantity === 0) {
-        emptyCart.style.display = "block";
-        cartItems.style.display = "none";
+        // Show empty cart if no products
+        if (totalQuantity === 0) {
+          emptyCart.style.display = "block";
+          cartItems.style.display = "none";
+        }
       }
     }
   });

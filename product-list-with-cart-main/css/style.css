@@ -295,6 +295,7 @@ aside{
     align-items: start;
     justify-content: start;
     gap: 20px;
+    display: none;
    
 
     .cart-item{
