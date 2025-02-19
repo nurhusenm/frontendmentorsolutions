@@ -461,15 +461,55 @@ aside{
 
     .selected-items{
         background-color: var(--rose-100);
-        padding: 15px;
+        padding: 10px 15px;
         border-radius: 10px;
-        margin: 10px 0;
+        margin: 10px ;
+        margin-bottom: 20px;
 
         .selected-item .selected-img img{
             width: 40px;
             height: 40px;
-            border-radius: 10px;
+            border-radius: 3px;
             object-fit: cover;
+        }
+
+        .selected-item .item-details .selected-total{
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--rose-900);
+            padding-bottom: 5px;
+        }
+
+        .selected-item .selected-img .selected-name .selected-name-text{
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--rose-900);
+            padding-bottom: 5px;
+
+            .item-details .selected-quantity{
+                font-size: 12px;
+                font-weight: 600;
+                color: var(--red);
+            }
+            
+            
+        }
+
+        .selected-item .selected-img .selected-name .item-details .selected-quantity{
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--red);
+        }
+        .selected-item .selected-img .selected-name .item-details .selected-price-text{
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--rose-300);
+           
+        }
+        .selected-item .selected-img .selected-name .item-details .selected-price{
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--rose-300);
         }
 
 
@@ -496,10 +536,53 @@ aside{
         align-items: center;
         justify-content: space-between;
         width: 100%;
+        margin-bottom: 20px;
         /* gap: 10px; */
         
     }
     }
     
+}
+
+.order-total{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 5px;
+
+
+    .order-total-text{
+        font-size: 12px;
+        font-weight: 200;
+        color: var(--rose-500);
+    }
+
+    .order-total-price{
+        font-size: 24px;
+        font-weight: 600;
+        color: var(--rose-900);
+    }
+}
+
+
+.confirm-btn{
+    background-color: var(--red);
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    width: 100%;
+    /* margin-top: 20px; */
+
+    &:hover{
+        background-color: var(--rose-900);
+    }
 }
 

@@ -8,6 +8,11 @@ const totalPrice = document.querySelector(".total-amount-price");
 const confirmBtn = document.querySelector(".confirm-btn");
 // const hoverText = document.querySelector(".hover-text");
 
+// Move these variables to the top level scope
+let totalQuantity = 0;
+let cartTotalPrice = 0;
+const productQuantities = {};
+
 async function loadProducts() {
   try {
     const response = await fetch("./data.json");
@@ -61,9 +66,6 @@ async function loadProducts() {
 
 document.addEventListener("DOMContentLoaded", loadProducts);
 document.addEventListener("DOMContentLoaded", () => {
-  let totalQuantity = 0;
-  let cartTotalPrice = 0;
-  const productQuantities = {};
   cartQuantity.textContent = totalQuantity;
 
   // Function to update total price display
@@ -221,30 +223,33 @@ confirmBtn.addEventListener("click", () => {
     '.cart-item:not([style*="display: none;"])'
   );
 
-  const selectedItems = Array.from(visibleCartItems).map((item) => {
-    const productName = item.querySelector(".item-name").textContent;
-    const productCards = document.querySelectorAll(".product-card");
-    const productCard = Array.from(productCards).find(
-      (card) => card.querySelector(".product-name").textContent === productName
-    );
-    const productImage = productCard
-      ? productCard.querySelector(".product-image").src
-      : "";
+  const selectedItems = Array.from(visibleCartItems)
+    .filter((item) => item.querySelector(".item-name").textContent) // Filter out empty items
+    .map((item) => {
+      const productName = item.querySelector(".item-name").textContent;
+      const productCards = document.querySelectorAll(".product-card");
+      const productCard = Array.from(productCards).find(
+        (card) =>
+          card.querySelector(".product-name").textContent === productName
+      );
+      const productImage = productCard
+        ? productCard.querySelector(".product-image").src
+        : "";
 
-    return {
-      itemsName: productName,
-      itemsImage: productImage,
-      itemsQuantity: parseInt(
-        item.querySelector(".item-quantity").textContent.split("x")[1].trim()
-      ),
-      itemsPrice: parseFloat(
-        item.querySelector(".item-price").textContent.replace("@ $", "")
-      ),
-      itemsTotal: parseFloat(
-        item.querySelector(".item-total").textContent.replace("$", "")
-      ),
-    };
-  });
+      return {
+        itemsName: productName,
+        itemsImage: productImage,
+        itemsQuantity: parseInt(
+          item.querySelector(".item-quantity").textContent.split("x")[1].trim()
+        ),
+        itemsPrice: parseFloat(
+          item.querySelector(".item-price").textContent.replace("@ $", "")
+        ),
+        itemsTotal: parseFloat(
+          item.querySelector(".item-total").textContent.replace("$", "")
+        ),
+      };
+    });
 
   // Generate HTML for selected items
   const selectedItemsHTML = selectedItems
@@ -254,15 +259,17 @@ confirmBtn.addEventListener("click", () => {
       <div class="selected-img">
         <img src="${item.itemsImage}" alt="${item.itemsName}" />
         <div class="selected-name">
-        <p>${item.itemsName}</p>
+        <p class="selected-name-text">${item.itemsName}</p>
         <div class="item-details">
-        <p>x${item.itemsQuantity}</p>
-        <p>$${item.itemsPrice.toFixed(2)}</p>
+        <p class="selected-quantity">x${item.itemsQuantity}</p>
+        <p class="selected-price">@ <span class="selected-price-text">$${item.itemsPrice.toFixed(
+          2
+        )}</span></p>
         </div>
         </div>
-        </div>
+      </div>
       <div class="item-details">
-        <p>$${item.itemsTotal.toFixed(2)}</p>
+        <p class="selected-total">$${item.itemsTotal.toFixed(2)}</p>
       </div>
     </div>
   `
@@ -279,9 +286,10 @@ confirmBtn.addEventListener("click", () => {
   const orderTotal = document.querySelector(".total-amount-price").textContent;
   selectedItemsContainer.innerHTML += `
     <div class="order-total">
-      <p>Order total</p>
-      <p>${orderTotal}</p>
+      <h3 class="order-total-text">Order total</h3>
+      <h3 class="order-total-price">${orderTotal}</h3>
     </div>
+
   `;
 
   // Clear previous items if any
@@ -293,3 +301,40 @@ confirmBtn.addEventListener("click", () => {
   // Insert after the confirmation message
   confirmationCard.querySelector("p").after(selectedItemsContainer);
 });
+
+// Add click handler for the "Start New Order" button
+document
+  .querySelector(".confirmation-card .confirm-btn")
+  .addEventListener("click", () => {
+    // Hide confirmation overlay
+    document.querySelector(".confirmation-overlay").style.display = "none";
+
+    // Reset cart display
+    emptyCart.style.display = "block";
+    cartItems.style.display = "none";
+
+    // Reset total quantity and price
+    totalQuantity = 0;
+    cartTotalPrice = 0;
+    cartQuantity.textContent = "0";
+    totalPrice.textContent = "$0.00";
+
+    // Reset all product quantities
+    Object.keys(productQuantities).forEach((product) => {
+      productQuantities[product] = 0;
+    });
+
+    // Reset hover text on all product cards
+    document.querySelectorAll(".hover-text").forEach((text) => {
+      text.textContent = "0";
+    });
+
+    // Remove all cart items except the template
+    const cartItemsContainer = cartItems.querySelector(".total-amount");
+    while (
+      cartItemsContainer.previousElementSibling &&
+      cartItemsContainer.previousElementSibling.classList.contains("cart-item")
+    ) {
+      cartItemsContainer.previousElementSibling.remove();
+    }
+  });
