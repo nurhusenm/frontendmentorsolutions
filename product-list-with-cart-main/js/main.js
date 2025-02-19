@@ -5,6 +5,7 @@ const plusIcon = document.querySelector(".plus-icon");
 const minusIcon = document.querySelector(".minus-icon");
 const itemName = document.querySelector(".item-name");
 const totalPrice = document.querySelector(".total-amount-price");
+const confirmBtn = document.querySelector(".confirm-btn");
 // const hoverText = document.querySelector(".hover-text");
 
 async function loadProducts() {
@@ -211,4 +212,84 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
+});
+
+confirmBtn.addEventListener("click", () => {
+  document.querySelector(".confirmation-overlay").style.display = "block";
+
+  const visibleCartItems = document.querySelectorAll(
+    '.cart-item:not([style*="display: none;"])'
+  );
+
+  const selectedItems = Array.from(visibleCartItems).map((item) => {
+    const productName = item.querySelector(".item-name").textContent;
+    const productCards = document.querySelectorAll(".product-card");
+    const productCard = Array.from(productCards).find(
+      (card) => card.querySelector(".product-name").textContent === productName
+    );
+    const productImage = productCard
+      ? productCard.querySelector(".product-image").src
+      : "";
+
+    return {
+      itemsName: productName,
+      itemsImage: productImage,
+      itemsQuantity: parseInt(
+        item.querySelector(".item-quantity").textContent.split("x")[1].trim()
+      ),
+      itemsPrice: parseFloat(
+        item.querySelector(".item-price").textContent.replace("@ $", "")
+      ),
+      itemsTotal: parseFloat(
+        item.querySelector(".item-total").textContent.replace("$", "")
+      ),
+    };
+  });
+
+  // Generate HTML for selected items
+  const selectedItemsHTML = selectedItems
+    .map(
+      (item) => `
+    <div class="selected-item">
+      <div class="selected-img">
+        <img src="${item.itemsImage}" alt="${item.itemsName}" />
+        <div class="selected-name">
+        <p>${item.itemsName}</p>
+        <div class="item-details">
+        <p>x${item.itemsQuantity}</p>
+        <p>$${item.itemsPrice.toFixed(2)}</p>
+        </div>
+        </div>
+        </div>
+      <div class="item-details">
+        <p>$${item.itemsTotal.toFixed(2)}</p>
+      </div>
+    </div>
+  `
+    )
+    .join("");
+
+  // Insert into confirmation card
+  const confirmationCard = document.querySelector(".confirmation-card");
+  const selectedItemsContainer = document.createElement("div");
+  selectedItemsContainer.className = "selected-items";
+  selectedItemsContainer.innerHTML = selectedItemsHTML;
+
+  // Add order total
+  const orderTotal = document.querySelector(".total-amount-price").textContent;
+  selectedItemsContainer.innerHTML += `
+    <div class="order-total">
+      <p>Order total</p>
+      <p>${orderTotal}</p>
+    </div>
+  `;
+
+  // Clear previous items if any
+  const existingItems = confirmationCard.querySelector(".selected-items");
+  if (existingItems) {
+    existingItems.remove();
+  }
+
+  // Insert after the confirmation message
+  confirmationCard.querySelector("p").after(selectedItemsContainer);
 });
