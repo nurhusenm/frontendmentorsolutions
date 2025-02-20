@@ -586,3 +586,42 @@ aside{
     }
 }
 
+
+@media screen and (min-width: 500px) and (max-width: 768px) {
+
+    body{
+        grid-template-columns: 1fr 1fr 250px;
+    }
+   .product-list{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 640px;
+   }
+
+   
+
+   .product-image-container {
+    .add-to-cart-btn{
+        padding: 10px 25px;
+        width: auto;
+
+        &:hover{
+            width: 100px;
+
+            .hover-text,.minus-icon, .plus-icon{
+                font-weight: 600;
+                font-size: 14px;
+            }
+        }
+    }
+  }}
+
+
+
+@media screen and (max-width: 500px) {
+
+
+}
+
+
