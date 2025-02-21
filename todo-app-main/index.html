@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Todo app</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Todo</h1>
+        <button class="theme-toggle">
+          <img src="images/icon-sun.svg" alt="Sun icon" />
+        </button>
+      </div>
+      <form class="todo-form">
+        <div class="input-group">
+          <input type="checkbox" name="todo-status" />
+          <input
+            type="text"
+            name="todo-text"
+            placeholder="Create a new todo..."
+          />
+        </div>
+      </form>
+      <ul class="todo-list">
+        <li class="todo-item">
+          <input type="checkbox" id="todo-1" />
+          <label for="todo-1">Complete the todo app challenge</label>
+        </li>
+        <li class="todo-item">
+          <input type="checkbox" id="todo-2" />
+          <label for="todo-2">Complete the todo app challenge</label>
+        </li>
+      </ul>
+
+      <div class="footer">
+        <div class="footer-left">
+          <p>5 item left</p>
+        </div>
+        <div class="footer-center">
+          <button class="footer-button">All</button>
+          <button class="footer-button">Active</button>
+          <button class="footer-button">Completed</button>
+        </div>
+        <div class="footer-right">
+          <button class="footer-button">Clear Completed</button>
+        </div>
+      </div>
+    </div>
+
+    Drag and drop to reorder list
+
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by <a href="#">Your Name Here</a>.
+    </div>
+  </body>
+</html>
