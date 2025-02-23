@@ -146,6 +146,19 @@ gap: 30px;
         border-radius: 5px;
         padding: 10px;
         gap: 10px;
+        color: var(--Very-Dark-Blue);
+        
+
+        p{
+            font-size: 14px;
+  
+        }
+
+        .footer-button{
+            font-size: 14px;
+        color: var(--Very-Dark-Blue);
+
+        }
         
 
     }
