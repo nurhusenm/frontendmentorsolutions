@@ -42,6 +42,7 @@ body{
     transform: translate(-50%, -50%);
 color: var(--Light-Grayish-Blue-Alt);
 gap: 30px;
+width: 55%;
 
     .header{
         display: flex;
@@ -102,7 +103,7 @@ gap: 30px;
     .todo-list{
         background-color: var(--Very-Dark-Desaturated-Blue);
         border-radius: 5px;
-        padding: 10px;
+        /* padding: 10px; */
         gap: 10px;
 
         .todo-item{
@@ -115,8 +116,9 @@ gap: 30px;
             border-radius: 5px;
             margin-bottom: 20px;
             gap: 5px;
-            padding: 10px;
-            border-bottom: 1px solid var(--Light-Grayish-Blue-Alt);
+            padding: 15px;
+            border-bottom: 1px solid var(--Dark-Grayish-Blue);
+            ;
             width: 100%;
 
         }
@@ -146,17 +148,39 @@ gap: 30px;
         border-radius: 5px;
         padding: 10px;
         gap: 10px;
-        color: var(--Very-Dark-Blue);
+        color: var(--Dark-Grayish-Blue);
+        padding: 20px;
+
+        .footer-center{
+            .footer-button{
+
+                padding-left: 10px;
+            }
+        }
+
+
         
 
         p{
-            font-size: 14px;
+            font-size: 12px;
   
         }
 
         .footer-button{
             font-size: 14px;
-        color: var(--Very-Dark-Blue);
+            color: var(--Dark-Grayish-Blue);
+
+
+            &:active{
+                color: var(--Bright-Blue);
+
+            }
+            &:hover{
+                color: var(--Bright-Blue);
+
+            }
+
+
 
         }
         
