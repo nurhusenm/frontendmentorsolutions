@@ -53,12 +53,11 @@
       </form>
       <ul class="todo-list">
         <li class="todo-item">
-          <input type="checkbox" id="todo-1" class="todo-checkbox" />
-          <label for="todo-1">Complete the todo app challenge</label>
-        </li>
-        <li class="todo-item">
-          <input type="checkbox" id="todo-2" class="todo-checkbox" />
-          <label for="todo-2">Complete the todo app challenge</label>
+          <div class="todo-info">
+            <input type="checkbox" id="todo-2" class="todo-checkbox" />
+            <label for="todo-2">Complete the todo app challenge</label>
+          </div>
+          <img src="./images/icon-cross.svg" alt="" class="cross-btn" />
         </li>
       </ul>
 
@@ -67,7 +66,7 @@
           <p>5 item left</p>
         </div>
         <div class="footer-center">
-          <button class="footer-button">All</button>
+          <button class="footer-button active">All</button>
           <button class="footer-button">Active</button>
           <button class="footer-button">Completed</button>
         </div>
@@ -78,6 +77,8 @@
     </div>
 
     <!-- Drag and drop to reorder list -->
+
+    <script src="./js/main.js"></script>
 
     <div class="attribution">
       Challenge by
