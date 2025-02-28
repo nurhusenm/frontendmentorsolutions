@@ -1,6 +1,7 @@
 const todoForm = document.querySelector(".todo-form");
 const todoInput = document.querySelector(".todo-input");
 const todoList = document.querySelector(".todo-list");
+const todoCheck = document.querySelectorAll(".todo-checkbox");
 
 todoForm.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
@@ -42,5 +43,44 @@ todoForm.addEventListener("keypress", (e) => {
       // Clear the input field
       todoInput.value = "";
     }
+  }
+});
+
+// todoCheck.addEventListener("click", (e) => {
+//   e.preventDefault();
+//   const checkbox = e.target.clos;
+// });
+
+document.addEventListener("click", (e) => {
+  console.log("clicked");
+
+  // Check if the clicked element is the button with class .todo-checkbox
+  const todoCheckbox = e.target.closest(".todo-checkbox");
+
+  if (todoCheckbox) {
+    e.preventDefault();
+
+    // Find the closest label within the same parent .todo-info
+    const label = todoCheckbox.closest(".todo-info").querySelector("label");
+
+    // Find the img inside the button
+    const img = todoCheckbox.querySelector("img");
+
+    if (label) {
+      console.log("Closest label element:", label);
+    } else {
+      console.log("No label found");
+    }
+
+    if (img) {
+      // Example: Toggle the display of the image
+      img.style.display = img.style.display === "none" ? "block" : "none";
+      console.log("Image found:", img);
+    } else {
+      console.log("No image found");
+    }
+
+    console.log(todoCheckbox);
+    console.log("clicked");
   }
 });
