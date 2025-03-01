@@ -7,6 +7,7 @@
 :root {
     --Bright-Blue: hsl(220, 98%, 61%);
     --Check-Background: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+     --Check-Background-Gradient: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
     --Very-Light-Gray: hsl(0, 0%, 98%);
     --Very-Light-Grayish-Blue: hsl(236, 33%, 92%);
     --Light-Grayish-Blue: hsl(233, 11%, 84%);
@@ -19,6 +20,7 @@
     --Dark-Grayish-Blue-Alt: hsl(234, 11%, 52%);
     --Very-Dark-Grayish-Blue-Alt: hsl(233, 14%, 35%);
     --Very-Dark-Grayish-Blue-Alt-2: hsl(237, 14%, 26%);
+    --Active-Background: hsl(192, 100%, 80%);
 }
 
 body {
@@ -97,8 +99,20 @@ body {
     border: 1px solid var(--Very-Dark-Grayish-Blue);
     background-color: var(--Check-Background);
     cursor: pointer;
+    display: flex; /* Ensure the button can contain the image */
+    justify-content: center; /* Center the image */
+    align-items: center; /* Center the image */
 }
 
+.todo-checkbox img {
+    padding: 10px;
+    background-color: var(--Check-Background);
+    display: none; /* Hide the image initially */
+}
+
+.todo-checkbox.active {
+    background: var(--Check-Background-Gradient); /* Change background when active */
+}
 .todo-list {
     background-color: var(--Very-Dark-Desaturated-Blue);
     border-radius: 5px;
