@@ -5,6 +5,9 @@ const todoCheck = document.querySelectorAll(".todo-checkbox");
 const crossBtn = document.querySelector(".cross-btn");
 const clearBtn = document.querySelector(".clear");
 const textTodos = document.querySelector(".todo-count");
+const toggleBtn = document.querySelector(".theme-toggle img");
+const sunIcon = document.querySelector(".sunIcon");
+const moonIcon = document.querySelector(".moonIcon");
 
 function countTodos() {
   const allTodos = document.querySelectorAll(".todo-item");
@@ -20,7 +23,7 @@ todoForm.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
 
-    const inputValue = todoInput.value.trim(); // Trim whitespace
+    const inputValue = todoInput.value; // Trim whitespace
     if (inputValue) {
       // console.log(`u entered ${inputValue}`);
 
@@ -98,6 +101,28 @@ document.addEventListener("click", (e) => {
       }
     });
   }
+  if (e.target.closest(".completed")) {
+    console.log("clear clicked");
+
+    // Get all todo items
+    const todoItems = document.querySelectorAll(".todo-item");
+    console.log(todoItems);
+
+    todoItems.forEach((item) => {
+      const checkedIcon = item.querySelector("button"); // Assuming this is the check icon
+      const check = checkedIcon.find(
+        (check) => check.classList.contain("active") === todoItems
+      );
+      console.log(check);
+
+      // Check if the icon is visible (indicating the item is completed)
+      if (checkedIcon && checkedIcon.classList.contain("active")) {
+        item.style.display = "none"; // Hide the completed item
+
+        // console.log("Hiding completed item");
+      }
+    });
+  }
 
   if (todoCheckbox) {
     e.preventDefault();
@@ -129,3 +154,29 @@ document.addEventListener("click", (e) => {
     }
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  sunIcon.classList.toggle("active");
+
+  toggleBtn.addEventListener("click", function () {
+    // e.preventDefault();
+    // sunIcon.classList.toggle("active");
+    // moonIcon.classList.toggle("active");
+    if (sunIcon.classList.contains("active")) {
+      sunIcon.classList.remove("active");
+      moonIcon.classList.add("active");
+      console.log("sun");
+    } else {
+      sunIcon.classList.add("active");
+      moonIcon.classList.remove("active");
+      document.body.background - "hsl(0, 0%, 98%)";
+      console.log("moon");
+    }
+  });
+});
+
+// document.addEventListener("DOMContentLoaded", () => {
+//   toggleBtn.forEach((img) => {
+//     img.classList.add("active");
+//   });
+// });

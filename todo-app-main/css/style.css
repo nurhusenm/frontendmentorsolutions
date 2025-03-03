@@ -57,6 +57,14 @@ body {
     background-color: transparent;
     border: none;
     cursor: pointer;
+
+}
+.theme-toggle img{
+    display: none;
+}
+
+.theme-toggle .active{
+    display: inline-block;
 }
 
 
