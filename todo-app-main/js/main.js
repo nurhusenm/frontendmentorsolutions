@@ -86,42 +86,39 @@ document.addEventListener("click", (e) => {
   // const checkedIcon = todosItem.querySelector("img");
 
   if (e.target.closest(".clear")) {
-    console.log("clear clicked");
-
-    // Get all todo items
     const todoItems = document.querySelectorAll(".todo-item");
 
     todoItems.forEach((item) => {
-      const checkedIcon = item.querySelector("img"); // Assuming this is the check icon
-
+      const checkedIcon = item.querySelector("img");
+      const left = item.closest(".todo-item");
       // Check if the icon is visible (indicating the item is completed)
-      if (checkedIcon && checkedIcon.style.display === "block") {
-        item.style.display = "none"; // Hide the completed item
-        console.log("Hiding completed item");
-      }
-    });
-  }
-  if (e.target.closest(".completed")) {
-    console.log("clear clicked");
-
-    // Get all todo items
-    const todoItems = document.querySelectorAll(".todo-item");
-    console.log(todoItems);
-
-    todoItems.forEach((item) => {
-      const checkedIcon = item.querySelector("button"); // Assuming this is the check icon
-      const check = checkedIcon.find(
-        (check) => check.classList.contain("active") === todoItems
-      );
-      console.log(check);
-
-      // Check if the icon is visible (indicating the item is completed)
-      if (checkedIcon && checkedIcon.classList.contain("active")) {
-        item.style.display = "none"; // Hide the completed item
+      if (left && checkedIcon && checkedIcon.style.display === "block") {
+        // item.style.display = "none"; // Hide the completed item
+        left.remove();
 
         // console.log("Hiding completed item");
       }
     });
+    countTodos();
+    // console.log(countTodos());
+  }
+  if (e.target.closest(".completed")) {
+    const todoItems = document.querySelectorAll(".todo-item");
+
+    todoItems.forEach((item) => {
+      const checkedIcon = item.querySelector("img");
+      const left = item.closest(".todo-item");
+      // Check if the icon is visible (indicating the item is completed)
+      if (left && checkedIcon && checkedIcon.style.display === "block") {
+        // item.style.display = "none"; // Hide the completed item
+        todoList.textContent = "";
+        todoList.appendChild(left);
+
+        // console.log("Hiding completed item");
+      }
+    });
+    countTodos();
+    // console.log(countTodos());
   }
 
   if (todoCheckbox) {
