@@ -38,7 +38,7 @@ body {
 .container {
     margin: 0;
     position: absolute;
-    top: 50%;
+    top: 38%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: var(--Light-Grayish-Blue-Alt);
@@ -51,16 +51,23 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
+
+    h1{
+        letter-spacing: 10px;
+        font-weight: 600;
+    }
 }
 
 .theme-toggle {
     background-color: transparent;
     border: none;
     cursor: pointer;
+   
 
 }
 .theme-toggle img{
     display: none;
+    width: 20px;
 }
 
 .theme-toggle .active{
@@ -202,4 +209,23 @@ button {
     background-color: transparent;
     border: none;
     cursor: pointer;
+}
+
+
+@media (max-width: 450px){
+    .container{
+        width: 91%;
+    }
+    label{
+        font-size: 14px;
+    }
+}
+@media screen and (min-width: 450px) and (max-width: 768px) {
+    .container{
+        width: 70%;
+    }
+
+    label{
+        font-size: 16px;
+    }
 }
