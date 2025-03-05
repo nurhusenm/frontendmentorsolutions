@@ -58,20 +58,23 @@ body {
     }
 }
 
+
+
+
+
 .theme-toggle {
     background-color: transparent;
     border: none;
     cursor: pointer;
-   
-
 }
-.theme-toggle img{
-    display: none;
+
+.theme-toggle img {
     width: 20px;
+    display: none; /* Hide all images by default */
 }
 
-.theme-toggle .active{
-    display: inline-block;
+.theme-toggle img.active {
+    display: inline-block; /* Show only the active image */
 }
 
 
