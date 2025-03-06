@@ -34,6 +34,11 @@ body {
     background-repeat: no-repeat;
     height: 40vh;
 }
+.light{
+    background-color: var(--Light-Grayish-Blue-Alt-Hover);
+    background-image: url(../images/bg-desktop-light.jpg);
+
+}
 
 .container {
     margin: 0;
@@ -107,6 +112,13 @@ body {
     color: var(--Very-Light-Grayish-Blue);
 }
 
+
+.light-them .todo-input:focus {
+    background-color: var(--Light-Grayish-Blue-Alt-Hover); /* Change background for light theme */
+    color: var(--Very-Dark-Blue); /* Change text color for light theme */
+}
+
+
 .todo-checkbox {
     margin: 10px;
     border-radius: 50%;
@@ -121,6 +133,17 @@ body {
     justify-content: center; /* Center the image */
     align-items: center; /* Center the image */
 }
+.light-them .todo-checkbox {
+    background-color: var(--Light-Grayish-Blue-Alt-Hover); /* Change background for light theme */
+  
+    border: 1px solid var(--Light-Grayish-Blue);
+}
+.light-them .todo-checkbox:hover {
+    /* Change background for light theme */
+  
+    border: 1px solid var(--Very-Dark-Desaturated-Blue);
+}
+
 
 .todo-checkbox img {
     padding: 10px;
@@ -152,6 +175,7 @@ body {
     
 }
 
+
 .todo-info {
     display: flex;
     justify-content: center;
@@ -181,6 +205,16 @@ body {
     gap: 10px;
     color: var(--Dark-Grayish-Blue);
     padding: 24px;
+}
+
+.light-them{
+    background-color: var(--Light-Grayish-Blue-Alt-Hover);
+    color: var(--Very-Dark-Blue);
+
+}
+.light-them .todo-count{
+    color: var(--Dark-Grayish-Blue)
+
 }
 
 .footer-center .footer-button {

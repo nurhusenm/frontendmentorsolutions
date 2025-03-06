@@ -26,7 +26,7 @@ todoForm.addEventListener("keypress", (e) => {
     const inputValue = todoInput.value.trim();
     if (inputValue) {
       const newTodoItem = document.createElement("li");
-      newTodoItem.classList.add("todo-item");
+      newTodoItem.classList.add("todo-item", "light-them");
 
       const todoInfo = document.createElement("div");
       todoInfo.classList.add("todo-info");
