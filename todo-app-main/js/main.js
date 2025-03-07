@@ -85,7 +85,7 @@ document.addEventListener("click", (e) => {
     if (img) {
       if (img.style.display === "none" || img.style.display === "") {
         img.style.display = "block"; // Show the check icon
-        label.style.color = "hsl(235, 19%, 35%)";
+        label.style.color = "hsl(236, 9%, 61%)";
         label.style.textDecoration = "line-through";
         todoCheckbox.classList.add("active");
       } else {
@@ -133,14 +133,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
   toggleBtn.addEventListener("click", function () {
     // Toggle the active class for sun and moon icons
-    sunIcon.classList.toggle("active");
-    moonIcon.classList.toggle("active");
-
+    // sunIcon.classList.toggle("active");
+    // moonIcon.classList.toggle("active");
     // Change the background color based on the active icon
-    if (sunIcon.classList.contains("active")) {
-      document.body.style.background = "hsl(0, 0%, 98%)"; // Light mode
-    } else {
-      document.body.style.background = "hsl(235, 21%, 11%)"; // Dark mode
-    }
+    // if (sunIcon.classList.contains("active")) {
+    // document.body.style.background = "hsl(0, 0%, 98%)"; // Light mode
+    // } else {
+    // document.body.style.background = "hsl(235, 21%, 11%)"; // Dark mode
+    // }
   });
 });
+
+function toggleTheme() {
+  const elements = document.querySelectorAll(".light-them");
+
+  elements.forEach((elnt) => {
+    // elnt.classList.toggle("light");
+    elnt.classList.toggle("light-them");
+  });
+  console.log("toggle clicked");
+}
+
+const themToggleBtn = document.querySelector(".theme-toggle");
+themToggleBtn.addEventListener("click", toggleTheme);

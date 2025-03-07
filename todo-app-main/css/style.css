@@ -34,11 +34,7 @@ body {
     background-repeat: no-repeat;
     height: 40vh;
 }
-.light{
-    background-color: var(--Light-Grayish-Blue-Alt-Hover);
-    background-image: url(../images/bg-desktop-light.jpg);
 
-}
 
 .container {
     margin: 0;
@@ -211,6 +207,13 @@ body {
     background-color: var(--Light-Grayish-Blue-Alt-Hover);
     color: var(--Very-Dark-Blue);
 
+
+}
+
+body.light-them{
+    background-color: var(--Light-Grayish-Blue-Alt-Hover);
+    background-image: url(../images/bg-desktop-light.jpg);
+
 }
 .light-them .todo-count{
     color: var(--Dark-Grayish-Blue)
@@ -224,6 +227,7 @@ body {
 .footer-center .active {
     color: var(--Bright-Blue);
 }
+
 
 p {
     font-size: 12px;
@@ -240,6 +244,9 @@ p {
 
 .footer-button:hover {
     color: var(--Very-Light-Grayish-Blue);
+}
+.light-them .footer-button:hover {
+    color: var(--Very-Dark-Blue);
 }
 
 button {
