@@ -6,6 +6,7 @@ const toggleBtn = document.querySelector(".theme-toggle img");
 const sunIcon = document.querySelector(".sunIcon");
 const moonIcon = document.querySelector(".moonIcon");
 const footerButtons = document.querySelectorAll(".footer-button");
+const themToggleBtn = document.querySelector(".theme-toggle");
 
 function countTodos() {
   const allTodos = document.querySelectorAll(".todo-item");
@@ -53,9 +54,17 @@ todoForm.addEventListener("keypress", (e) => {
 
       todoInput.value = "";
       countTodos();
+
+      if (themToggleBtn.classList.contains("light-them")) {
+        console.log("true");
+        // toggleTheme();
+      } else {
+        toggleTheme();
+      }
     }
   }
 });
+// console.log(themToggleBtn.classList.contains("light-them"));
 
 document.addEventListener("click", (e) => {
   if (e.target.closest(".cross-btn")) {
@@ -150,9 +159,8 @@ function toggleTheme() {
   elements.forEach((elnt) => {
     // elnt.classList.toggle("light");
     elnt.classList.toggle("light-them");
+    console.log("toggle clicked");
   });
-  console.log("toggle clicked");
 }
 
-const themToggleBtn = document.querySelector(".theme-toggle");
 themToggleBtn.addEventListener("click", toggleTheme);
