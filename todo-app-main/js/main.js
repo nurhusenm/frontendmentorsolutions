@@ -27,7 +27,12 @@ todoForm.addEventListener("keypress", (e) => {
     const inputValue = todoInput.value.trim();
     if (inputValue) {
       const newTodoItem = document.createElement("li");
-      newTodoItem.classList.add("todo-item", "light-them");
+      newTodoItem.classList.add("todo-item");
+
+      // Check if the body has the light-them class
+      if (document.body.classList.contains("light-them")) {
+        newTodoItem.classList.add("light-them"); // Add light-them class if in light mode
+      }
 
       const todoInfo = document.createElement("div");
       todoInfo.classList.add("todo-info");
@@ -54,13 +59,6 @@ todoForm.addEventListener("keypress", (e) => {
 
       todoInput.value = "";
       countTodos();
-
-      if (themToggleBtn.classList.contains("light-them")) {
-        console.log("true");
-        // toggleTheme();
-      } else {
-        toggleTheme();
-      }
     }
   }
 });
@@ -154,13 +152,30 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function toggleTheme() {
-  const elements = document.querySelectorAll(".light-them");
+  // Toggle the light-them class on the body
+  if (document.body.classList.contains("light-them")) {
+    document.body.classList.remove("light-them");
+    console.log("removed");
+  } else {
+    document.body.classList.add("light-them");
+    console.log("added");
+  }
 
+  // Select all elements that should change with the theme
+  const elements = document.querySelectorAll(
+    ".todo-item, .input-group, .footer, .footer-button, .todo-input, .todo-checkbox, .todo-list"
+  );
+
+  // Toggle the light-them class on each element
   elements.forEach((elnt) => {
-    // elnt.classList.toggle("light");
-    elnt.classList.toggle("light-them");
-    console.log("toggle clicked");
+    if (document.body.classList.contains("light-them")) {
+      elnt.classList.add("light-them");
+    } else {
+      elnt.classList.remove("light-them");
+    }
   });
+
+  console.log("toggle clicked");
 }
 
 themToggleBtn.addEventListener("click", toggleTheme);
