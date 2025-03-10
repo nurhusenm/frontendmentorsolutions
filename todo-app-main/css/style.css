@@ -263,6 +263,31 @@ button {
     label{
         font-size: 14px;
     }
+    .todo-checkbox{
+        width: 20px;
+        height: 20px;
+    }
+    .footer-center{
+        display: flex;
+        position: absolute;
+        bottom: -61px;
+        margin-top: 46px;
+    background-color: var(--Very-Dark-Desaturated-Blue);
+        width: 100%;
+        justify-content: center;
+        padding: 15px;
+        left: 0;
+        gap: 20px;
+    }
+
+    .light-them .footer-center{
+        background-color: var(--Light-Grayish-Blue-Alt-Hover); /* Change background for light theme */
+        color: var(--Very-Dark-Blue); /* Change text color for light theme */
+    
+    }
+    
+
+
 }
 @media screen and (min-width: 450px) and (max-width: 768px) {
     .container{
@@ -271,5 +296,9 @@ button {
 
     label{
         font-size: 16px;
+    }
+    .todo-checkbox{
+        width: 25px;
+        height: 25px;
     }
 }
