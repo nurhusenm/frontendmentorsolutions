@@ -163,7 +163,7 @@ function toggleTheme() {
 
   // Select all elements that should change with the theme
   const elements = document.querySelectorAll(
-    ".todo-item, .input-group, .footer, .footer-button, .todo-input, .todo-checkbox, .todo-list"
+    ".todo-item, .input-group, .footer, .footer-button, .todo-input, .todo-checkbox, .todo-list, .footer-center"
   );
 
   // Toggle the light-them class on each element

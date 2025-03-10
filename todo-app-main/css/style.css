@@ -254,6 +254,11 @@ button {
     border: none;
     cursor: pointer;
 }
+.light-them .footer-center{
+    background-color: var(--Light-Grayish-Blue-Alt-Hover); /* Change background for light theme */
+    color: var(--Very-Dark-Blue); /* Change text color for light theme */
+
+}
 
 
 @media (max-width: 450px){
