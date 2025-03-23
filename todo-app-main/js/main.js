@@ -29,6 +29,8 @@ todoForm.addEventListener("keypress", (e) => {
       const newTodoItem = document.createElement("li");
       newTodoItem.classList.add("todo-item");
 
+      newTodoItem.setAttribute("draggable", true);
+
       // Check if the body has the light-them class
       if (document.body.classList.contains("light-them")) {
         newTodoItem.classList.add("light-them"); // Add light-them class if in light mode
@@ -57,12 +59,42 @@ todoForm.addEventListener("keypress", (e) => {
       newTodoItem.appendChild(img);
       todoList.appendChild(newTodoItem);
 
+      todoList.addEventListener("dragstart", (e) => {
+        e.target.classList.add("dragging");
+        console.log("drag started", e.target.textContent);
+      });
+
+      todoList.addEventListener("dragend", (e) => {
+        e.target.classList.remove("dragging");
+        console.log("drag end");
+      });
+
       todoInput.value = "";
       countTodos();
     }
   }
 });
 // console.log(themToggleBtn.classList.contains("light-them"));
+
+todoList.addEventListener("dragover", (e) => {
+  e.preventDefault();
+  const draggingItem = document.querySelector(".dragging");
+  const siblings = [...todoList.querySelectorAll(".todo-item:not(.dragging)")];
+
+  // Find the sibling we should insert after
+  const nextSibling = siblings.find((sibling) => {
+    const rect = sibling.getBoundingClientRect();
+    const midPoint = rect.top + rect.height / 2;
+    return e.clientY < midPoint;
+  });
+
+  // Insert the dragging item before the found sibling
+  if (nextSibling) {
+    todoList.insertBefore(draggingItem, nextSibling);
+  } else {
+    todoList.appendChild(draggingItem);
+  }
+});
 
 document.addEventListener("click", (e) => {
   if (e.target.closest(".cross-btn")) {
