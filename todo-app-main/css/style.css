@@ -30,6 +30,26 @@ body {
     background-color: var(--Very-Dark-Blue);
     background-image: url(../images/bg-desktop-dark.jpg);
     background-size: cover;
+    height: 100vh; /* Use full viewport height */
+    overflow: hidden; /* Prevent body scrolling */
+
+    .todo-list::-webkit-scrollbar {
+        width: 8px; /* Width of the scrollbar */
+    }
+    
+    .todo-list::-webkit-scrollbar-thumb {
+        background-color: var(--Dark-Grayish-Blue); /* Color of the scrollbar thumb */
+        border-radius: 10px; /* Rounded corners for the scrollbar thumb */
+    }
+    
+    .todo-list::-webkit-scrollbar-track {
+        background: transparent; /* Background of the scrollbar track */
+    }
+    
+    /* Optional: Add hover effect for the list */
+    .todo-list:hover {
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Slightly increase shadow on hover */
+    }
     background-position: center;
     background-repeat: no-repeat;
     height: 40vh;
@@ -37,15 +57,20 @@ body {
 
 
 .container {
-    /* margin: 0; */
-    position: absolute;
-    top: 53%;
+
+
+
+    position: relative; 
+    top: 29%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     color: var(--Light-Grayish-Blue-Alt);
     gap: 30px;
     width: 55%;
-}
+    height: 100%;
+    
+
+    }
 
 .header {
     display: flex;
@@ -154,6 +179,30 @@ body {
     background-color: var(--Very-Dark-Desaturated-Blue);
     border-radius: 5px;
     gap: 10px;
+    max-height: 300px; /* Set a maximum height for the todo list */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 10px; /* Add padding for better appearance */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+    transition: box-shadow 0.3s ease; /* Smooth transition for shadow */
+}
+
+/* Custom scrollbar styles */
+.todo-list::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+}
+
+.todo-list::-webkit-scrollbar-thumb {
+    background-color: var(--Dark-Grayish-Blue); /* Color of the scrollbar thumb */
+    border-radius: 10px; /* Rounded corners for the scrollbar thumb */
+}
+
+.todo-list::-webkit-scrollbar-track {
+    background: transparent; /* Background of the scrollbar track */
+}
+
+/* Optional: Add hover effect for the list */
+.todo-list:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Slightly increase shadow on hover */
 }
 
 .todo-item {
