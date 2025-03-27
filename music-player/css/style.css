@@ -14,3 +14,45 @@
     align-items: center;
     
 }
+
+
+.progress-container {
+    background: #e0e0e0;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 20px 0;
+    height: 6px;
+    width: 90%;
+    position: relative;
+    display: block;
+  }
+  
+  .progress-bar {
+    background: #2196f3;
+    border-radius: 5px;
+    height: 100%;
+    width: 0%;
+    transition: width 0.1s linear;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  /* Add these new styles for the progress point */
+  .progress-point {
+    width: 16px;
+    height: 16px;
+    background: #2196f3;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    left: 0%;
+    cursor: grab;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    transition: left 0.1s linear;
+  }
+  
+  .progress-point:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
