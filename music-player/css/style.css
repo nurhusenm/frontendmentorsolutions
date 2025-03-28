@@ -36,17 +36,24 @@
     object-fit: cover;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     margin-bottom: 15px;
+    transition: opacity 0.3s ease;
+}
+
+.song-info img.fade {
+    opacity: 0.5;
 }
 
 .song-info h4 {
     color: #fff;
     font-size: 24px;
     margin-bottom: 5px;
+    animation: slideIn 0.3s ease forwards;
 }
 
 .song-info p {
     color: #aaa;
     font-size: 14px;
+    animation: slideIn 0.3s ease forwards;
 }
 
 .progress-container {
@@ -103,6 +110,7 @@
     justify-content: center;
     align-items: center;
     gap: 20px;
+    position: relative;
 }
 
 .controls button {
@@ -114,6 +122,25 @@
     padding: 10px;
     border-radius: 50%;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.controls button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.controls button:active::after {
+    transform: translate(-50%, -50%) scale(1);
 }
 
 .playBtn {
@@ -124,6 +151,11 @@
 
 .playBtn:hover {
     background: rgba(33, 150, 243, 0.4) !important;
+    transform: scale(1.1);
+}
+
+.prevBtn:hover, .nextBtn:hover {
+    color: #2196f3;
     transform: scale(1.1);
 }
 
@@ -140,4 +172,109 @@
     background: rgba(255, 255, 255, 0.1);
     border-radius: 4px;
     cursor: pointer;
+}
+
+/* Add animation for song changes */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Add a now playing animation */
+.now-playing {
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+    margin-top: 10px;
+}
+
+.bar {
+    width: 3px;
+    height: 15px;
+    background: #2196f3;
+    animation: soundBars 1s ease infinite;
+}
+
+.bar:nth-child(2) { animation-delay: 0.2s; }
+.bar:nth-child(3) { animation-delay: 0.4s; }
+.bar:nth-child(4) { animation-delay: 0.6s; }
+
+@keyframes soundBars {
+    0% { height: 15px; }
+    50% { height: 5px; }
+    100% { height: 15px; }
+}
+
+/* Add these new styles to your existing CSS */
+
+.search-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.search-input {
+    flex: 1;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 14px;
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.search-input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.search-button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background: #2196f3;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-button:hover {
+    background: #1976d2;
+    transform: scale(1.05);
+}
+
+/* Loading animation */
+.loading {
+    position: relative;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top-color: #2196f3;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: translate(-50%, -50%) rotate(360deg); }
 }

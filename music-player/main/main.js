@@ -8,6 +8,138 @@ const progressPoint = document.querySelector(".progress-point");
 const currentTimeEl = document.querySelector(".current-time");
 const totalTimeEl = document.querySelector(".total-time");
 const volumeSlider = document.querySelector(".volume-slider");
+const songImage = document.querySelector(".song-info img");
+const songTitle = document.querySelector(".song-info h4");
+const songArtist = document.querySelector(".song-info p");
+
+let currentSongIndex = 0;
+let playlist = [];
+
+// Fetch songs from Deezer API
+async function fetchSongs(query = "motivational") {
+  try {
+    // Using a CORS proxy to avoid CORS issues
+    const response = await fetch(
+      `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search?q=${query}&limit=10`
+    );
+    const data = await response.json();
+
+    playlist = data.data.map((song) => ({
+      title: song.title,
+      artist: song.artist.name,
+      audioPreview: song.preview, // 30-second preview URL
+      imgPath: song.album.cover_medium,
+      duration: song.duration,
+    }));
+
+    // Load first song
+    loadSong(playlist[0]);
+  } catch (error) {
+    console.error("Error fetching songs:", error);
+  }
+}
+
+// Load song function
+function loadSong(song) {
+  songTitle.textContent = song.title;
+  songArtist.textContent = song.artist;
+  audio.src = song.audioPreview;
+  songImage.src = song.imgPath;
+
+  // Add fade effect
+  songImage.classList.add("fade");
+  setTimeout(() => songImage.classList.remove("fade"), 500);
+
+  // Update playing status
+  updateNowPlayingBars(false);
+}
+
+// Previous song
+function prevSong() {
+  currentSongIndex--;
+  if (currentSongIndex < 0) {
+    currentSongIndex = playlist.length - 1;
+  }
+  loadSong(playlist[currentSongIndex]);
+  if (!audio.paused) {
+    audio.play();
+    updateNowPlayingBars(true);
+  }
+}
+
+// Next song
+function nextSong() {
+  currentSongIndex++;
+  if (currentSongIndex > playlist.length - 1) {
+    currentSongIndex = 0;
+  }
+  loadSong(playlist[currentSongIndex]);
+  if (!audio.paused) {
+    audio.play();
+    updateNowPlayingBars(true);
+  }
+}
+
+// Update playing animation
+function updateNowPlayingBars(isPlaying) {
+  const bars = document.querySelectorAll(".bar");
+  bars.forEach((bar) => {
+    bar.style.animationPlayState = isPlaying ? "running" : "paused";
+  });
+}
+
+// Play/Pause functionality
+playBtn.addEventListener("click", () => {
+  if (audio.paused) {
+    audio.play();
+    playBtn.textContent = "⏸";
+    updateNowPlayingBars(true);
+  } else {
+    audio.pause();
+    playBtn.textContent = "▶";
+    updateNowPlayingBars(false);
+  }
+});
+
+// Add search functionality
+const searchInput = document.createElement("input");
+searchInput.type = "text";
+searchInput.placeholder = "Search for songs...";
+searchInput.classList.add("search-input");
+
+const searchButton = document.createElement("button");
+searchButton.textContent = "🔍";
+searchButton.classList.add("search-button");
+
+const searchContainer = document.createElement("div");
+searchContainer.classList.add("search-container");
+searchContainer.appendChild(searchInput);
+searchContainer.appendChild(searchButton);
+
+document.querySelector(".music-player").prepend(searchContainer);
+
+searchButton.addEventListener("click", () => {
+  if (searchInput.value.trim()) {
+    fetchSongs(searchInput.value.trim());
+  }
+});
+
+searchInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter" && searchInput.value.trim()) {
+    fetchSongs(searchInput.value.trim());
+  }
+});
+
+// Keep your existing event listeners and time formatting functions
+prevBtn.addEventListener("click", prevSong);
+nextBtn.addEventListener("click", nextSong);
+audio.addEventListener("ended", nextSong);
+volumeSlider.addEventListener("input", (e) => {
+  audio.volume = e.target.value / 100;
+});
+
+// Initialize with motivational songs
+fetchSongs("motivational");
 
 // Format time in minutes and seconds
 function formatTime(seconds) {
@@ -60,30 +192,6 @@ document.addEventListener("mousemove", (e) => {
 document.addEventListener("mouseup", () => {
   isDragging = false;
 });
-
-// Play/Pause functionality
-playBtn.addEventListener("click", () => {
-  if (audio.paused) {
-    audio.play();
-    playBtn.textContent = "⏸";
-  } else {
-    audio.pause();
-    playBtn.textContent = "▶";
-  }
-});
-
-// Volume control
-volumeSlider.addEventListener("input", (e) => {
-  audio.volume = e.target.value / 100;
-});
-
-// Load metadata
-audio.addEventListener("loadedmetadata", () => {
-  totalTimeEl.textContent = formatTime(audio.duration);
-});
-
-audio.addEventListener("timeupdate", updateProgress);
-progressContainer.addEventListener("click", setProgress);
 
 // Keyboard controls
 document.addEventListener("keydown", (e) => {
