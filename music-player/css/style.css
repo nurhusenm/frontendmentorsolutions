@@ -60,49 +60,59 @@
     background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
     cursor: pointer;
-    margin: 25px 0;
+    margin: 25px 0 10px 0;
     height: 6px;
     width: 100%;
     position: relative;
+    transition: height 0.2s ease;
+}
+
+.progress-container:hover {
+    height: 8px;
 }
 
 .progress-bar {
     background: #2196f3;
-    border-radius: 10px;
+    border-radius: inherit;
     height: 100%;
     width: 0%;
-    transition: width 0.1s linear;
     position: absolute;
     top: 0;
     left: 0;
+    transition: width 0.1s linear;
 }
 
 .progress-point {
-    width: 16px;
-    height: 16px;
+    width: 12px;
+    height: 12px;
     background: #fff;
     border-radius: 50%;
     position: absolute;
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(0.8);
     left: 0%;
     cursor: grab;
-    box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
-    transition: all 0.2s ease;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+    z-index: 2;
 }
 
-.progress-point:hover {
-    transform: translate(-50%, -50%) scale(1.2);
-    background: #2196f3;
+.progress-container:hover .progress-point {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.progress-point:active {
+    cursor: grabbing;
+    transform: translate(-50%, -50%) scale(1.1);
 }
 
 .time-info {
     display: flex;
     justify-content: space-between;
-    color: #aaa;
+    color: rgba(255, 255, 255, 0.7);
     font-size: 12px;
-    margin-top: -15px;
-    margin-bottom: 15px;
+    padding: 0 2px;
+    margin-bottom: 20px;
 }
 
 .controls {
