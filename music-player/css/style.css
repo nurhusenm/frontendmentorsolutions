@@ -288,3 +288,138 @@
 @keyframes spin {
     to { transform: translate(-50%, -50%) rotate(360deg); }
 }
+
+/* Add these new styles */
+.extra-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 15px 0;
+}
+
+.extra-controls button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #fff;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.extra-controls button:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.extra-controls button.active {
+    color: #2196f3;
+    opacity: 1;
+}
+
+.playlist-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    margin-top: 10px;
+}
+
+.playlist-container.show {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.playlist-container h3 {
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.playlist-items {
+    list-style: none;
+}
+
+.playlist-item {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.playlist-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.playlist-item.active {
+    background: rgba(33, 150, 243, 0.2);
+}
+
+.playlist-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.playlist-item-info {
+    flex: 1;
+}
+
+.playlist-item-info h4 {
+    font-size: 14px;
+    margin: 0;
+}
+
+.playlist-item-info p {
+    font-size: 12px;
+    color: #aaa;
+    margin: 0;
+}
+
+/* Add visualization canvas */
+.visualizer-container {
+    height: 50px;
+    margin: 10px 0;
+    display: none;
+}
+
+.visualizer-container.show {
+    display: block;
+}
+
+#visualizer {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+/* Add tooltip styles */
+[data-tooltip] {
+    position: relative;
+}
+
+[data-tooltip]:before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 12px;
+    border-radius: 5px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+[data-tooltip]:hover:before {
+    opacity: 1;
+    visibility: visible;
+}
