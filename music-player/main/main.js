@@ -12,7 +12,7 @@ const songImage = document.querySelector(".song-info img");
 const songTitle = document.querySelector(".song-info h4");
 const songArtist = document.querySelector(".song-info p");
 
-let currentSongIndex = 0;
+let currentSongIndex = 1;
 let playlist = [];
 let isShuffleOn = false;
 let isRepeatOn = false;
@@ -21,21 +21,21 @@ let favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
 // Fetch songs from Deezer API
 async function fetchSongs(query = "motivational") {
   try {
-    // Using a CORS proxy to avoid CORS issues
     const response = await fetch(
-      `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search?q=${query}&limit=10`
+      `https://corsproxy.io/?${encodeURIComponent(
+        `https://api.deezer.com/search?q=${query}&limit=10`
+      )}`
     );
     const data = await response.json();
 
     playlist = data.data.map((song) => ({
       title: song.title,
       artist: song.artist.name,
-      audioPreview: song.preview, // 30-second preview URL
+      audioPreview: song.preview,
       imgPath: song.album.cover_medium,
       duration: song.duration,
     }));
 
-    // Load first song
     loadSong(playlist[0]);
   } catch (error) {
     console.error("Error fetching songs:", error);
