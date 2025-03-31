@@ -11,11 +11,19 @@ const volumeSlider = document.querySelector(".volume-slider");
 const songImage = document.querySelector(".song-info img");
 const songTitle = document.querySelector(".song-info h4");
 const songArtist = document.querySelector(".song-info p");
+const playlistItems = document.querySelector(".playlist-items");
+const favoriteBtn = document.querySelector(".favorite-btn");
+const playlistBtn = document.querySelector(".playlist-btn");
+const shuffleBtn = document.querySelector(".shuffle-btn");
+const repeatBtn = document.querySelector(".repeat-btn");
+const searchInput = document.querySelector(".search-input");
+const searchButton = document.querySelector(".search-button");
 
-let currentSongIndex = 1;
+let currentSongIndex = 0;
 let playlist = [];
 let isShuffleOn = false;
 let isRepeatOn = false;
+let isPlaying = false;
 let favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
 
 // Fetch songs from Deezer API
@@ -36,7 +44,9 @@ async function fetchSongs(query = "motivational") {
       duration: song.duration,
     }));
 
-    loadSong(playlist[0]);
+    currentSongIndex = 0;
+    loadSong(playlist[currentSongIndex]);
+    updatePlaylist();
   } catch (error) {
     console.error("Error fetching songs:", error);
   }
@@ -49,36 +59,37 @@ function loadSong(song) {
   audio.src = song.audioPreview;
   songImage.src = song.imgPath;
 
-  // Reset progress and time
   progressBar.style.width = "0%";
   progressPoint.style.left = "0%";
   currentTimeEl.textContent = "0:00";
   totalTimeEl.textContent = "0:00";
 
-  // Add fade effect
   songImage.classList.add("fade");
   setTimeout(() => songImage.classList.remove("fade"), 500);
 
-  // Update playing status
-  updateNowPlayingBars(false);
+  audio.addEventListener(
+    "loadedmetadata",
+    () => {
+      totalTimeEl.textContent = formatTime(audio.duration);
+    },
+    { once: true }
+  );
 
-  // Wait for metadata to load to get duration
-  audio.addEventListener("loadedmetadata", () => {
-    totalTimeEl.textContent = formatTime(audio.duration);
-  });
+  if (isPlaying) {
+    audio.play().catch((error) => console.error("Playback failed:", error));
+    playBtn.textContent = "⏸";
+    updateNowPlayingBars(true);
+  } else {
+    playBtn.textContent = "▶";
+    updateNowPlayingBars(false);
+  }
 }
 
 // Previous song
 function prevSong() {
-  currentSongIndex--;
-  if (currentSongIndex < 0) {
-    currentSongIndex = playlist.length - 1;
-  }
+  currentSongIndex = (currentSongIndex - 1 + playlist.length) % playlist.length;
   loadSong(playlist[currentSongIndex]);
-  if (!audio.paused) {
-    audio.play();
-    updateNowPlayingBars(true);
-  }
+  updatePlaylist();
 }
 
 // Next song
@@ -89,13 +100,10 @@ function nextSong() {
     currentSongIndex = (currentSongIndex + 1) % playlist.length;
   }
   loadSong(playlist[currentSongIndex]);
-  if (!audio.paused) {
-    audio.play();
-  }
   updatePlaylist();
 }
 
-// Update playing animation
+// Update now playing animation
 function updateNowPlayingBars(isPlaying) {
   const bars = document.querySelectorAll(".bar");
   bars.forEach((bar) => {
@@ -109,34 +117,20 @@ playBtn.addEventListener("click", () => {
     audio
       .play()
       .then(() => {
+        isPlaying = true;
         playBtn.textContent = "⏸";
         updateNowPlayingBars(true);
       })
       .catch((error) => console.error("Playback failed:", error));
   } else {
     audio.pause();
+    isPlaying = false;
     playBtn.textContent = "▶";
     updateNowPlayingBars(false);
   }
 });
 
-// Add search functionality
-const searchInput = document.createElement("input");
-searchInput.type = "text";
-searchInput.placeholder = "Search for songs...";
-searchInput.classList.add("search-input");
-
-const searchButton = document.createElement("button");
-searchButton.textContent = "🔍";
-searchButton.classList.add("search-button");
-
-const searchContainer = document.createElement("div");
-searchContainer.classList.add("search-container");
-searchContainer.appendChild(searchInput);
-searchContainer.appendChild(searchButton);
-
-document.querySelector(".music-player").prepend(searchContainer);
-
+// Search functionality
 searchButton.addEventListener("click", () => {
   if (searchInput.value.trim()) {
     fetchSongs(searchInput.value.trim());
@@ -149,6 +143,7 @@ searchInput.addEventListener("keypress", (e) => {
   }
 });
 
+// Event listeners
 prevBtn.addEventListener("click", prevSong);
 nextBtn.addEventListener("click", nextSong);
 audio.addEventListener("ended", () => {
@@ -162,11 +157,10 @@ audio.addEventListener("ended", () => {
 volumeSlider.addEventListener("input", (e) => {
   audio.volume = e.target.value / 100;
 });
+audio.addEventListener("timeupdate", updateProgress);
+progressContainer.addEventListener("click", setProgress);
 
-// Initialize with motivational songs
-fetchSongs("motivational");
-
-// Format time in minutes and seconds
+// Format time
 function formatTime(seconds) {
   if (isNaN(seconds)) return "0:00";
   const minutes = Math.floor(seconds / 60);
@@ -174,22 +168,20 @@ function formatTime(seconds) {
   return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
 }
 
-// Update progress bar and time
+// Update progress bar
 function updateProgress() {
   const { duration, currentTime } = audio;
   if (isNaN(duration)) return;
 
-  // Update progress bar
   const progressPercent = (currentTime / duration) * 100;
   progressBar.style.width = `${progressPercent}%`;
   progressPoint.style.left = `${progressPercent}%`;
 
-  // Update time displays
   currentTimeEl.textContent = formatTime(currentTime);
   totalTimeEl.textContent = formatTime(duration);
 }
 
-// Set progress when clicking on progress bar
+// Set progress on click
 function setProgress(e) {
   const width = progressContainer.clientWidth;
   const clickX = e.offsetX;
@@ -197,133 +189,7 @@ function setProgress(e) {
   audio.currentTime = (clickX / width) * duration;
 }
 
-// Handle drag functionality for progress point
-let isDragging = false;
-
-progressPoint.addEventListener("mousedown", (e) => {
-  isDragging = true;
-  e.stopPropagation(); // Prevent click event on container
-});
-
-document.addEventListener("mousemove", (e) => {
-  if (!isDragging) return;
-
-  const rect = progressContainer.getBoundingClientRect();
-  const containerWidth = progressContainer.clientWidth;
-  let x = e.clientX - rect.left;
-
-  // Keep within bounds
-  x = Math.max(0, Math.min(x, containerWidth));
-
-  const percent = x / containerWidth;
-
-  // Update visuals
-  progressBar.style.width = `${percent * 100}%`;
-  progressPoint.style.left = `${percent * 100}%`;
-
-  // Update audio time
-  audio.currentTime = percent * audio.duration;
-});
-
-document.addEventListener("mouseup", () => {
-  isDragging = false;
-});
-
-// Keyboard controls
-document.addEventListener("keydown", (e) => {
-  if (e.code === "Space") {
-    e.preventDefault();
-    if (audio.paused) {
-      audio.play();
-      playBtn.textContent = "⏸";
-    } else {
-      audio.pause();
-      playBtn.textContent = "▶";
-    }
-  }
-});
-
-// Add these event listeners
-audio.addEventListener("timeupdate", updateProgress);
-progressContainer.addEventListener("click", setProgress);
-
-// Adding error handling for audio
-audio.addEventListener("error", (e) => {
-  console.error("Audio error:", e);
-  alert("Error loading audio. Please try another song.");
-});
-
-// Add new elements to your existing variables
-const playlistContainer = document.querySelector(".playlist-container");
-const playlistItems = document.querySelector(".playlist-items");
-const favoriteBtn = document.querySelector(".favorite-btn");
-const playlistBtn = document.querySelector(".playlist-btn");
-const shuffleBtn = document.querySelector(".shuffle-btn");
-const repeatBtn = document.querySelector(".repeat-btn");
-
-// Add audio visualization
-const visualizerContainer = document.createElement("div");
-visualizerContainer.className = "visualizer-container";
-const canvas = document.createElement("canvas");
-canvas.id = "visualizer";
-visualizerContainer.appendChild(canvas);
-document.querySelector(".song-info").appendChild(visualizerContainer);
-
-// Set up audio context and visualization
-let audioContext, analyser, source;
-function setupAudioVisualization() {
-  audioContext = new (window.AudioContext || window.webkitAudioContext)();
-  analyser = audioContext.createAnalyser();
-  source = audioContext.createMediaElementSource(audio);
-  source.connect(analyser);
-  analyser.connect(audioContext.destination);
-
-  visualize();
-}
-
-// Visualization function
-function visualize() {
-  const canvas = document.getElementById("visualizer");
-  const ctx = canvas.getContext("2d");
-  const WIDTH = canvas.width;
-  const HEIGHT = canvas.height;
-
-  analyser.fftSize = 256;
-  const bufferLength = analyser.frequencyBinCount;
-  const dataArray = new Uint8Array(bufferLength);
-
-  ctx.clearRect(0, 0, WIDTH, HEIGHT);
-
-  function draw() {
-    requestAnimationFrame(draw);
-    analyser.getByteFrequencyData(dataArray);
-    ctx.fillStyle = "rgb(24, 25, 28)";
-    ctx.fillRect(0, 0, WIDTH, HEIGHT);
-
-    const barWidth = (WIDTH / bufferLength) * 2.5;
-    let barHeight;
-    let x = 0;
-
-    for (let i = 0; i < bufferLength; i++) {
-      barHeight = dataArray[i] / 2;
-      ctx.fillStyle = `rgb(33, 150, 243)`;
-      ctx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
-      x += barWidth + 1;
-    }
-  }
-
-  draw();
-}
-
-// Add tooltips to buttons
-function addTooltips() {
-  favoriteBtn.setAttribute("data-tooltip", "Add to Favorites");
-  playlistBtn.setAttribute("data-tooltip", "Show Playlist");
-  shuffleBtn.setAttribute("data-tooltip", "Shuffle");
-  repeatBtn.setAttribute("data-tooltip", "Repeat");
-}
-
-// Update playlist display
+// Playlist functionality
 function updatePlaylist() {
   playlistItems.innerHTML = "";
   playlist.forEach((song, index) => {
@@ -332,60 +198,25 @@ function updatePlaylist() {
       index === currentSongIndex ? "active" : ""
     }`;
     li.innerHTML = `
-            <img src="${song.imgPath}" alt="${song.title}">
-            <div class="playlist-item-info">
-                <h4>${song.title}</h4>
-                <p>${song.artist}</p>
-            </div>
-        `;
+      <img src="${song.imgPath}" alt="${song.title}">
+      <div class="playlist-item-info">
+        <h4>${song.title}</h4>
+        <p>${song.artist}</p>
+      </div>
+    `;
     li.addEventListener("click", () => {
       currentSongIndex = index;
       loadSong(playlist[currentSongIndex]);
+      isPlaying = true;
       audio.play();
     });
     playlistItems.appendChild(li);
   });
 }
 
-// Toggle functions
-function togglePlaylist() {
-  playlistContainer.classList.toggle("show");
-  playlistBtn.classList.toggle("active");
-  updatePlaylist();
-}
-
-function toggleFavorite() {
-  const currentSong = playlist[currentSongIndex];
-  const songId = `${currentSong.title}-${currentSong.artist}`;
-
-  if (favorites.includes(songId)) {
-    favorites = favorites.filter((id) => id !== songId);
-    favoriteBtn.textContent = "♡";
-  } else {
-    favorites.push(songId);
-    favoriteBtn.textContent = "♥";
-  }
-
-  localStorage.setItem("favorites", JSON.stringify(favorites));
-  favoriteBtn.classList.toggle("active");
-}
-
-function toggleShuffle() {
-  isShuffleOn = !isShuffleOn;
-  shuffleBtn.classList.toggle("active");
-}
-
-function toggleRepeat() {
-  isRepeatOn = !isRepeatOn;
-  repeatBtn.classList.toggle("active");
-}
-
-// Add event listeners
-playlistBtn.addEventListener("click", togglePlaylist);
-favoriteBtn.addEventListener("click", toggleFavorite);
-shuffleBtn.addEventListener("click", toggleShuffle);
-repeatBtn.addEventListener("click", toggleRepeat);
+playlistBtn.addEventListener("click", () => {
+  document.querySelector(".playlist-container").classList.toggle("show");
+});
 
 // Initialize
-addTooltips();
-setupAudioVisualization();
+fetchSongs("motivational");
