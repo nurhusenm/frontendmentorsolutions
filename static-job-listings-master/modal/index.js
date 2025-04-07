@@ -58,12 +58,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (Array.isArray(data)) {
     // Check if data is an array
+    let allJobsHTML = "";
     data.forEach((job) => {
       const jobHTML = createJobListHTML(job); // Create HTML for each job
-      const tempDiv = document.createElement("div"); // Create a temporary div
-      tempDiv.innerHTML = jobHTML; // Set the innerHTML to the job HTML
-      jobLists.appendChild(tempDiv.firstChild); // Append the first child of tempDiv to jobLists
+      allJobsHTML += jobHTML;
     });
+    jobLists.innerHTML = allJobsHTML;
   } else {
     console.error("Fetched data is not an array");
   }

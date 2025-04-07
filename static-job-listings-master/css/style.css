@@ -1,0 +1,45 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+
+:root{
+
+  --Desaturated-Dark-Cyan: hsl(180, 29%, 50%)
+  --Light-Grayish-Cyan-Background: hsl(180, 52%, 96%)
+  --Light-Grayish-Cyan-(Filter Tablets): hsl(180, 31%, 95%)
+  --Dark-Grayish-Cyan: hsl(180, 8%, 52%)
+  --Very-Dark-Grayish-Cyan:  hsl(180, 14%, 20%)
+}
+
+body{
+  font-family: 'Poppins', sans-serif;
+  align-items: center;
+  justify-content: center;
+ 
+  background-color: hsl(180, 52%, 96%)
+  
+}
+
+.header{
+  background-color: hsl(180, 29%, 50%);
+  height: fit-content;
+}
+
+.container-2{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 700px;
+
+}
+
+
+.job-lists > div {
+    border: 1px solid red; /* Add a red border to each job listing */
+    margin-bottom: 20px; /* Add some spacing between them */
+  }
+
