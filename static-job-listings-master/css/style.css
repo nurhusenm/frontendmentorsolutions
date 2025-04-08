@@ -36,9 +36,17 @@ body{
   max-width: 700px;
 
 }
+.search-input{
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
 
-
+.job-lists{
+  width: 100%;
+}
 .job-lists > div {
+
     border: 1px solid red; /* Add a red border to each job listing */
     margin-bottom: 20px; /* Add some spacing between them */
   }
