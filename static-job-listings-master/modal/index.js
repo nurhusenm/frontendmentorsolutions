@@ -50,7 +50,7 @@ function createJobListHTML(job) {
   `;
 }
 
-// When the DOM is fully loaded, fetch jobs and display them
+//  fetch jobs and display them
 document.addEventListener("DOMContentLoaded", async () => {
   const data = await fetchJobs(); // Fetch the jobs data
 
