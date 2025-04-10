@@ -33,21 +33,66 @@ body{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 700px;
-
 }
 .search-input{
-  width: 100%;
+  /* width: 100%; */
   align-items: center;
   justify-content: center;
 }
 
 .job-lists{
-  width: 100%;
+  /* width: 100%; */
+ margin: 2% 20%;
+
 }
-.job-lists > div {
+.job-list {
+  display: flex;
+  gap: 10px;
 
     border: 1px solid red; /* Add a red border to each job listing */
     margin-bottom: 20px; /* Add some spacing between them */
+   
   }
 
+  .logos-div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .company-logo {
+    width: 45px; /* Set the width */
+    height: 45px; /* Set the height */
+    border-radius: 10px; /* Round the corners */
+    object-fit: contain; /* Ensure the image fits within the dimensions without cropping, preserving aspect ratio */
+    /* Other styles you might want: */
+    margin-right: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #eee;
+   
+  }
+
+  .job-infos{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .info-header{
+    display: flex;
+    gap: 20px;
+
+  }
+  .job-desc ul{
+    display: flex;
+    gap: 20px;
+
+  }
+  .job-desc ul li:first-child{
+    list-style: none;
+  }
+  .required-lang ul li{
+    display: flex;
+    list-style: none;
+  }
