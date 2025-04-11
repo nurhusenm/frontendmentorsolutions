@@ -21,36 +21,43 @@ function createJobListHTML(job) {
 
   return `
     <div class="job-list">
-      <div class="logos-div">
-        <img src="${job.logo}" alt="${job.company}" class="company-logo"  /> 
-
-      </div>
-
-      <div class="job-infos">
-        <div class="info-header">
-          <h3>${job.company}</h3>
-          <p>${job.new ? "new" : ""}
-          </p>
-          <p>
-          ${job.featured ? "featured" : ""} 
-          </p>
-        </div>
-        <div>${job.position}</div>
-        <div class="job-desc">
-          <ul>
-            <li>${job.postedAt}</li>
-            <li>${job.contract}</li>
-            <li>${job.location}</li>
-          </ul>
-        </div>
-      </div>
+    <div class="left-side">
+    <div class="logos-div">
+    <img src="${job.logo}" alt="${job.company}" class="company-logo"  /> 
+    
+    </div>
+    
+    <div class="job-infos">
+    <div class="info-header">
+    <h3 class="company-name">${job.company}</h3>
+    <p class="${job.new ? "new" : ""}">${job.new ? "New!" : ""}
+    </p>
+    <p class="${job.featured ? "feature" : ""}">
+    ${job.featured ? "featured" : ""} 
+    </p>
+    </div>
+    <div class="job-position">${job.position}</div>
+    <div class="job-desc">
+    <ul>
+    <li>${job.postedAt}</li>
+    <li>${job.contract}</li>
+    <li>${job.location}</li>
+    </ul>
+    </div>
+    </div>
+    </div>
 
       <div class="required-lang">
         <ul>
-          <li>${job.languages.join(", ")} ${job.tools.join(", ")}</li>
-          <li></li>
+
+          <li>${job.role}  </li>
+          <li>${job.level}</li>
+          <li>${job.languages.join(" ")}</li>
+          <li> ${job.tools.join(" ")}</li>
+         
         </ul>
       </div>
+
     </div>
   `;
 }
