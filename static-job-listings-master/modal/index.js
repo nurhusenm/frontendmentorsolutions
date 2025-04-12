@@ -50,10 +50,16 @@ function createJobListHTML(job) {
       <div class="required-lang">
         <ul>
 
-          <li>${job.role}  </li>
-          <li>${job.level}</li>
-          <li>${job.languages.join(" ")}</li>
-          <li> ${job.tools.join(" ")}</li>
+          <li class="skill-tag">${job.role}  </li>
+          <li class="skill-tag">${job.level}</li>
+      
+          ${job.languages
+            .map((language) => `<li class="skill-tag">${language}</li>`)
+            .join("")}
+          ${job.tools
+            .map((tool) => `<li class="skill-tag">${tool}</li>`)
+            .join("")}
+     
          
         </ul>
       </div>
