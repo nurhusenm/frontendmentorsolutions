@@ -1,4 +1,6 @@
 const jobLists = document.querySelector(".job-lists");
+const skillTags = document.querySelectorAll("li");
+const skillTag = document.querySelector(".skill-tag");
 
 // Fetch jobs from the JSON file
 async function fetchJobs() {
@@ -13,7 +15,7 @@ async function fetchJobs() {
 
 // Create HTML for a job listing
 function createJobListHTML(job) {
-  console.log(job); // Log the job object to see its structure
+  // console.log(job); // Log the job object to see its structure
   if (!job || !job.logo) {
     console.error("Job is undefined or missing logo:", job);
     return ""; // Return an empty string if job is not valid
@@ -72,7 +74,7 @@ function createJobListHTML(job) {
 document.addEventListener("DOMContentLoaded", async () => {
   const data = await fetchJobs(); // Fetch the jobs data
 
-  console.log(data); // Log the fetched data to see its structure
+  // console.log(data); // Log the fetched data to see its structure
 
   if (Array.isArray(data)) {
     // Check if data is an array
@@ -85,4 +87,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   } else {
     console.error("Fetched data is not an array");
   }
+});
+
+skillTags.forEach((skill) => {
+  skill.addEventListener("click", (e) => {
+    e.preventDefault();
+    console.log(e.target.value + "clicked");
+  });
+});
+skillTag.addEventListener("click", (e) => {
+  e.preventDefault();
+  console.log("clicked");
 });

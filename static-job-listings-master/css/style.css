@@ -25,9 +25,11 @@ body{
 
 .header{
   background-color: hsl(180, 29%, 50%);
-  height: fit-content;
 }
-
+img{
+  width: 100%;
+  height: 30vh;
+}
 .container-2{
   display: flex;
   flex-direction: column;
@@ -35,9 +37,32 @@ body{
   align-items: center;
 }
 .search-input{
-  /* width: 100%; */
+  width: 100%;
   align-items: center;
   justify-content: center;
+}
+.filter{
+  border-radius: 10px;
+  display: flex;
+  margin: 1% 10%;
+  margin-top: -25px;
+}
+.input{
+  width: 80%;
+  border: none;
+  background-color: white;
+  padding: 20px;
+  border-left: 10px;
+  
+}
+.clearBtn{
+  width: 20%;
+  border: none;
+  background-color: white;
+  color: hsl(180, 29%, 50%);
+  padding: 20px;
+  border-right: 10px;
+  cursor: pointer;
 }
 
 .job-lists{
@@ -48,6 +73,7 @@ body{
 .job-list {
   display: flex;
   justify-content: space-between;
+  overflow:hidden;
 
     margin-bottom: 20px; /* Add some spacing between them */
     box-shadow: 0px 10px 5px hsl(180, 8%, 83%);
@@ -177,3 +203,27 @@ body{
     cursor: pointer;
 
   }
+
+
+@media (max-width: 690px){
+
+  .job-list{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  .left-side{
+    padding-bottom: 20px;
+    border-bottom: 2px solid  hsl(180, 8%, 52%);
+  }
+}
+@media  (max-width: 500px) {
+  
+  .left-side{
+    padding-bottom: 20px;
+    border-bottom: 2px solid  hsl(180, 8%, 52%);
+    display: flex;
+    flex-direction: column;
+  }
+  
+}
