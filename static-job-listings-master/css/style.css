@@ -73,7 +73,7 @@ img{
 .job-list {
   display: flex;
   justify-content: space-between;
-  overflow:hidden;
+  /* overflow:hidden; */
 
     margin-bottom: 20px; /* Add some spacing between them */
     box-shadow: 0px 10px 5px hsl(180, 8%, 83%);
@@ -216,14 +216,34 @@ img{
     padding-bottom: 20px;
     border-bottom: 2px solid  hsl(180, 8%, 52%);
   }
+  .required-lang ul {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 5px;
+  }
 }
-@media  (max-width: 500px) {
-  
-  .left-side{
+@media (max-width: 500px) {
+  .job-list{
+    margin-bottom: 50px;
+  }
+  .left-side {
     padding-bottom: 20px;
-    border-bottom: 2px solid  hsl(180, 8%, 52%);
+    border-bottom: 2px solid hsl(180, 8%, 52%);
     display: flex;
     flex-direction: column;
   }
-  
+  .logos-div {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    margin-top: -10px; /* Adjust as needed for vertical positioning */
+    overflow: visible; /* Allow content to extend outside */
+    /* Optionally set a specific height for logos-div if needed */
+    /* height: 40px; Adjust as needed */
+  }
+  .company-logo {
+    margin-top: -30px; /* Adjust this negative value to control how much is outside */
+    /* You might need to adjust width and height of the logo as well */
+  }
 }
