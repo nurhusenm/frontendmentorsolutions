@@ -253,14 +253,11 @@ img{
     display: flex;
     align-items: center;
     justify-content: left;
-    margin-top: -10px; /* Adjust as needed for vertical positioning */
-    overflow: visible; /* Allow content to extend outside */
-    /* Optionally set a specific height for logos-div if needed */
-    /* height: 40px; Adjust as needed */
+    margin-top: -10px; 
+    overflow: visible; 
   }
   .company-logo {
-    margin-top: -30px; /* Adjust this negative value to control how much is outside */
-    /* You might need to adjust width and height of the logo as well */
+    margin-top: -30px; 
   }
   .required-lang ul{
     flex-wrap: wrap;

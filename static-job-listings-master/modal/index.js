@@ -1,101 +1,88 @@
 const jobLists = document.querySelector(".job-lists");
-const skillTags = document.querySelectorAll("li");
-const skillTag = document.querySelector(".skill-tag");
 
 // Fetch jobs from the JSON file
 async function fetchJobs() {
   try {
     const res = await fetch("data.json");
-    const data = await res.json(); // This will be an array of job objects
-    return data; // Return the fetched data
+    const data = await res.json();
+    return data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
 
 // Create HTML for a job listing
 function createJobListHTML(job) {
-  // console.log(job); // Log the job object to see its structure
   if (!job || !job.logo) {
     console.error("Job is undefined or missing logo:", job);
-    return ""; // Return an empty string if job is not valid
+    return "";
   }
 
   return `
     <div class="job-list">
-    <div class="left-side">
-    <div class="logos-div">
-    <img src="${job.logo}" alt="${job.company}" class="company-logo"  /> 
-    
-    </div>
-    
-    <div class="job-infos">
-    <div class="info-header">
-    <h3 class="company-name">${job.company}</h3>
-    <p class="${job.new ? "new" : ""}">${job.new ? "New!" : ""}
-    </p>
-    <p class="${job.featured ? "feature" : ""}">
-    ${job.featured ? "featured" : ""} 
-    </p>
-    </div>
-    <div class="job-position">${job.position}</div>
-    <div class="job-desc">
-    <ul>
-    <li>${job.postedAt}</li>
-    <li>${job.contract}</li>
-    <li>${job.location}</li>
-    </ul>
-    </div>
-    </div>
-    </div>
-
+      <div class="left-side">
+        <div class="logos-div">
+          <img src="${job.logo}" alt="${job.company}" class="company-logo" />
+        </div>
+        <div class="job-infos">
+          <div class="info-header">
+            <h3 class="company-name">${job.company}</h3>
+            <p class="${job.new ? "new" : ""}">${job.new ? "New!" : ""}</p>
+            <p class="${job.featured ? "feature" : ""}">${
+    job.featured ? "featured" : ""
+  }</p>
+          </div>
+          <div class="job-position">${job.position}</div>
+          <div class="job-desc">
+            <ul>
+              <li>${job.postedAt}</li>
+              <li>${job.contract}</li>
+              <li>${job.location}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
       <div class="required-lang">
         <ul>
-
-          <li class="skill-tag">${job.role}  </li>
-          <li class="skill-tag">${job.level}</li>
-      
+          <li class="skill-tag" data-value="${job.role}">${job.role}</li>
+          <li class="skill-tag" data-value="${job.level}">${job.level}</li>
           ${job.languages
-            .map((language) => `<li class="skill-tag">${language}</li>`)
+            .map(
+              (language) =>
+                `<li class="skill-tag" data-value="${language}">${language}</li>`
+            )
             .join("")}
           ${job.tools
-            .map((tool) => `<li class="skill-tag">${tool}</li>`)
+            .map(
+              (tool) =>
+                `<li class="skill-tag" data-value="${tool}">${tool}</li>`
+            )
             .join("")}
-     
-         
         </ul>
       </div>
-
     </div>
   `;
 }
 
-//  fetch jobs and display them
 document.addEventListener("DOMContentLoaded", async () => {
-  const data = await fetchJobs(); // Fetch the jobs data
-
-  // console.log(data); // Log the fetched data to see its structure
+  const data = await fetchJobs();
 
   if (Array.isArray(data)) {
-    // Check if data is an array
     let allJobsHTML = "";
     data.forEach((job) => {
-      const jobHTML = createJobListHTML(job); // Create HTML for each job
-      allJobsHTML += jobHTML;
+      allJobsHTML += createJobListHTML(job);
     });
     jobLists.innerHTML = allJobsHTML;
+
+    const skillTags = document.querySelectorAll(".skill-tag");
+    skillTags.forEach((skill) => {
+      skill.addEventListener("click", (e) => {
+        const value = e.target.dataset.value;
+        console.log(value + " clicked");
+        // You can now use 'value' to filter your jobs
+      });
+    });
   } else {
     console.error("Fetched data is not an array");
   }
-});
-
-skillTags.forEach((skill) => {
-  skill.addEventListener("click", (e) => {
-    e.preventDefault();
-    console.log(e.target.value + "clicked");
-  });
-});
-skillTag.addEventListener("click", (e) => {
-  e.preventDefault();
-  console.log("clicked");
 });
