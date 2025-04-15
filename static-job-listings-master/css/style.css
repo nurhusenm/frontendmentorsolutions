@@ -168,11 +168,73 @@ img{
   .job-desc ul li:first-child{
     list-style: none;
   }
+
+  .selected-tags{
+    display: flex;
+            justify-content: start;
+            align-items: center;
+            flex-wrap: wrap;
+            /* gap: 5px; */
+            margin-left: 2px;
+
+            
+  }
+  .selected-tags ul li{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    font-size: 12px;
+
+    background-color: hsl(180, 31%, 95%);
+    padding: 1px 5px;
+    
+    padding-right: 1px;
+    border-radius: 5px;
+    color: hsl(180, 29%, 50%);;
+    gap: 4px;
+    /* font-size: 16px; */
+    /* cursor: pointer; */
+  }
+  .selected-tags ul{
+    /* flex-direction: column; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: center;
+    gap: 5px;
+
+  }
+
+  .delete-skill {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 20px;
+    background-color: hsl(180, 29%, 50%);
+    cursor: pointer;
+    transition: all 0.5s;
+    /* Optionally adjust line-height if padding doesn't give enough space */
+    /* line-height: 1; */
+  }
+  
+  .delete-skill:hover {
+    background-color: black;
+  }
+ 
   .required-lang ul li{
     display: flex;
     list-style: none;
     font-size: 10px;
   }
+
+
   .job-desc ul li{
     font-size: 12px;
     color: hsl(180, 8%, 52%);
@@ -188,12 +250,14 @@ img{
   }
 
 
+
   .required-lang ul {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 5px;
   }
+
   .skill-tag{
     background-color: hsl(180, 31%, 95%);
     padding: 5px;

@@ -1,4 +1,6 @@
 const jobLists = document.querySelector(".job-lists");
+const selectedTag = document.querySelector(".selected-tag");
+const requiredLang = document.querySelector(".selected-tags ul");
 
 // Fetch jobs from the JSON file
 async function fetchJobs() {
@@ -78,8 +80,23 @@ document.addEventListener("DOMContentLoaded", async () => {
     skillTags.forEach((skill) => {
       skill.addEventListener("click", (e) => {
         const value = e.target.dataset.value;
-        console.log(value + " clicked");
+        const newLi = document.createElement("li");
+        newLi.classList.add("selected-tag");
+        newLi.innerHTML = `<span class="delete-skill"> &times; </span>`;
+
+        requiredLang.appendChild(newLi);
+
+        // console.log(value + " clicked");
         // You can now use 'value' to filter your jobs
+        newLi.innerHTML += value;
+
+        const deleteButton = newLi.querySelector(".delete-skill");
+        if (deleteButton) {
+          deleteButton.addEventListener("click", () => {
+            console.log("clicked" + value);
+            newLi.remove();
+          });
+        }
       });
     });
   } else {
