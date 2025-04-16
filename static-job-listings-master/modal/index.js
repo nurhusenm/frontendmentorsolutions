@@ -1,6 +1,8 @@
 const jobLists = document.querySelector(".job-lists");
 const selectedTag = document.querySelector(".selected-tag");
 const requiredLang = document.querySelector(".selected-tags ul");
+const selectedTagsUl = document.querySelector(".selected-tags ul");
+const searchInput = document.querySelector(".search-input");
 
 // Fetch jobs from the JSON file
 async function fetchJobs() {
@@ -10,6 +12,15 @@ async function fetchJobs() {
     return data;
   } catch (error) {
     console.error(error);
+  }
+}
+
+function checkToggle() {
+  const listItems = selectedTagsUl.querySelectorAll("li");
+  if (listItems.length === 0) {
+    searchInput.classList.add("display");
+  } else {
+    searchInput.classList.remove("display");
   }
 }
 
@@ -89,12 +100,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         // console.log(value + " clicked");
         // You can now use 'value' to filter your jobs
         newLi.innerHTML += value;
+        checkToggle();
 
         const deleteButton = newLi.querySelector(".delete-skill");
         if (deleteButton) {
           deleteButton.addEventListener("click", () => {
             console.log("clicked" + value);
             newLi.remove();
+            checkToggle();
           });
         }
       });
