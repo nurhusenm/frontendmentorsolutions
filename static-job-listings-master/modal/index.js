@@ -79,6 +79,7 @@ function createJobListHTML(job) {
 
 document.addEventListener("DOMContentLoaded", async () => {
   const data = await fetchJobs();
+  let activeFilters = [];
 
   if (Array.isArray(data)) {
     let allJobsHTML = "";
@@ -96,6 +97,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         newLi.innerHTML = `<span class="delete-skill"> &times; </span>`;
 
         requiredLang.appendChild(newLi);
+
+        if (!activeFilters.includes(value)) {
+          activeFilters.push(value);
+        }
 
         // console.log(value + " clicked");
         // You can now use 'value' to filter your jobs
