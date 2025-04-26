@@ -2,6 +2,7 @@ const jobLists = document.querySelector(".job-lists");
 const requiredLang = document.querySelector(".selected-tags ul");
 const selectedTagsUl = document.querySelector(".selected-tags ul");
 const searchInput = document.querySelector(".search-input");
+const clearBtn = document.querySelector(".clearBtn");
 
 // State to store the currently selected filter tags
 let activeFilters = [];
@@ -147,4 +148,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   } else {
     console.error("Fetched data is not an array");
   }
+});
+
+clearBtn.addEventListener("click", () => {
+  activeFilters = [];
+  selectedTagsUl.innerHTML = "";
+  checkToggle();
+  // filterJobs();
+  renderJobs(allJobsData);
 });
