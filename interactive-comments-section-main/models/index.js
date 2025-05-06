@@ -17,19 +17,25 @@ async function fetchComments() {
 
 function createCommentsHtml(comment) {
   return `
-      <div> 
-                <div>
+      <div class="comments-container"> 
+            <div class="comments">
+                <div class="score">
                     <span>+</sapn>
                     <span>${comment.score}</span>
                     <span>-</sapn>
                 </div>
-                <div>
-                <img src="${comment.user.image.png}" />
-                <h3>${comment.user.username}</h3>
-                <p>${comment.createdAt}</p>
-                <button> &times; Reply</button>
+                  <div>
+                      <div>
+                          <img src="${comment.user.image.png}" />
+                          <h3>${comment.user.username}</h3>
+                          <p>${comment.createdAt}</p>
+                          <button> &times; Reply</button>
+                      </div>
+                     <div>${comment.content}</div>
                 </div>
-                <div>${comment.content}</div>
+                     
+             </div>
+            
          
           <div>
           ${comment.replies
@@ -39,15 +45,16 @@ function createCommentsHtml(comment) {
                     <span>+</sapn>
                     <span>${reply.score}</span>
                     <span>-</sapn>
-                </div>
+            </div>
                 <div>
                 <img src="${reply.user.image.png}" />
                 <h3>${reply.user.username}</h3>
                 <p>${reply.createdAt}</p>
                 <button> &times; Reply</button>
-                </div>
+            </div>
                 <div>${reply.content}</div>
            </div>
+
             </div>
            `;
             })
