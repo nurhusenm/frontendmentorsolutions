@@ -9,7 +9,6 @@
 --Pink-400: hsl(358, 79%, 66%);
 --Purple-200: hsl(239, 57%, 85%);
 --Pink-200: hsl(357, 100%, 86%);
-
 --Grey-800: hsl(212, 24%, 26%);
 --Grey-500: hsl(211, 10%, 45%);
 --Grey-100: hsl(223, 19%, 93%);
@@ -19,7 +18,7 @@
 }
 
 body{
-    background-color: var(--Grey-100);
+    background-color: hsl(223, 19%, 93%);
     justify-content: center;
     align-items: center;
 
@@ -30,24 +29,99 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    /* margin-top: 40px; */
     max-width: 700px;
+    /* row-gap: 20px; */
 
 }
 
 .comment-section{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 40px;
 
 }
 
-.score{
+.score {
     display: flex;
-    background-color: var(--Grey-100);
-    justify-content: center;
+    flex-direction: column;
+    background-color: hsl(223, 19%, 93%);
+    justify-content: space-between; /* Changed from space-around */
     align-items: center;
+    padding: 6px 12px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    /* You might not need gap with space-between */
 }
+
+.score .plus, .minus {
+    font-size: 20px;
+    color: hsl(211, 10%, 45%);;
+    cursor: pointer;
+    /* You might need to style these spans individually if needed */
+}
+
+.score .score-number{
+    color: hsl(238, 40%, 52%);
+    font-size: 18px;
+}
+
 
 .comments{
     display: flex;
+    gap: 20px;
+    margin: 10px 2px;
+    background-color: hsl(0, 100%, 100%);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+.header-left{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.header-left img{
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+}
+.header-left h4{
+    color: hsl(212, 24%, 26%);
+}
+
+.header-left p, .comment-text{
+    color: hsl(211, 10%, 45%);
+    font-size: 16px;
+
+}
+
+.header button{
+    background-color: hsl(0, 100%, 100%);
+    border: none;
+    color: hsl(238, 40%, 52%);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 3s;
+}
+
+.reply-section{    
+    margin-left: 40px;
+    border-left: 2px solid hsl(211, 10%, 45%);
+    border-radius: 20px;
+    /* margin: 2px 2px; */
+}
+.replies{
+    margin-left: 20px;
 }
